@@ -754,24 +754,23 @@ tr:hover td{background:#f8fafc}
   function buildWireGuardConf(cfg) {
     const srv = DB.servers.find(s => s.id === cfg.serverId) || DB.servers[0];
     return [
-      `[Interface]`,
-      `PrivateKey = ${cfg.clientPrivateKey}`,
-      `Address = ${srv.address}`,
-      `DNS = ${DB.settings.dns}`,
-      `MTU = ${DB.settings.mtu}`,
-      ``,
-      `[Peer]`,
-      `PublicKey = ${srv.publicKey}`,
-      `AllowedIPs = 0.0.0.0/0, ::/0`,
-      `Endpoint = ${srv.endpoint}`,
-      `PersistentKeepalive = 20`
-    ].join("
-");
+      "[Interface]",
+      "PrivateKey = " + cfg.clientPrivateKey,
+      "Address = " + srv.address,
+      "DNS = " + DB.settings.dns,
+      "MTU = " + DB.settings.mtu,
+      "",
+      "[Peer]",
+      "PublicKey = " + srv.publicKey,
+      "AllowedIPs = 0.0.0.0/0, ::/0",
+      "Endpoint = " + srv.endpoint,
+      "PersistentKeepalive = 20"
+    ].join("\n");
   }
 
   // دانلود فایل واقعی .conf بدون هیچ‌گونه پسوند .txt
   function downloadConfFile(confContent, fileNameBase) {
-    const clean = String(fileNameBase || "WireGuard_Config").replace(/[^a-zA-Z0-9_؀-ۿ-]/g, "_");
+    const clean = String(fileNameBase || "WireGuard_Config").replace(/[^a-zA-Z0-9_\u0600-\u06FF-]/g, "_");
     const fileName = clean.endsWith(".conf") ? clean : clean + ".conf";
     const blob = new Blob([confContent], { type: "application/x-wg-config" });
     const url = URL.createObjectURL(blob);
@@ -821,7 +820,7 @@ tr:hover td{background:#f8fafc}
 
         const remDays = getRemDays(data.expiresAt);
         const isValid = remDays > 0;
-        document.getElementById("pubTitle").textContent = `اشتراک: ${data.configName}`;
+        document.getElementById("pubTitle").textContent = "اشتراک: " + data.configName;
         document.getElementById("pubDetails").innerHTML = `
           <div class="pub-row"><span>نام کاربر</span><span>${esc(data.userName)}</span></div>
           <div class="pub-row"><span>نام کانفیگ</span><span>${esc(data.configName)}</span></div>
@@ -834,19 +833,18 @@ tr:hover td{background:#f8fafc}
         `;
 
         const confText = [
-          `[Interface]`,
-          `PrivateKey = ${data.clientPrivateKey}`,
-          `Address = ${data.address}`,
-          `DNS = ${data.dns}`,
-          `MTU = ${data.mtu}`,
-          ``,
-          `[Peer]`,
-          `PublicKey = ${data.serverPublicKey}`,
-          `AllowedIPs = 0.0.0.0/0, ::/0`,
-          `Endpoint = ${data.endpoint}`,
-          `PersistentKeepalive = 20`
-        ].join("
-");
+          "[Interface]",
+          "PrivateKey = " + data.clientPrivateKey,
+          "Address = " + data.address,
+          "DNS = " + data.dns,
+          "MTU = " + data.mtu,
+          "",
+          "[Peer]",
+          "PublicKey = " + data.serverPublicKey,
+          "AllowedIPs = 0.0.0.0/0, ::/0",
+          "Endpoint = " + data.endpoint,
+          "PersistentKeepalive = 20"
+        ].join("\n");
 
         document.getElementById("pubConfText").textContent = confText;
         const qrBox = document.getElementById("pubQr");
@@ -1053,7 +1051,7 @@ tr:hover td{background:#f8fafc}
     const confStr = buildWireGuardConf(c);
     const remDays = getRemDays(c.expiresAt);
 
-    document.getElementById("modalTitle").textContent = `جزئیات کانفیگ: ${c.configName}`;
+    document.getElementById("modalTitle").textContent = "جزئیات کانفیگ: " + c.configName;
     document.getElementById("modalBody").innerHTML = `
       <div class="info-note">وضعیت اتصال: <strong>آماده‌سازی فایل</strong> (جهت اتصال واقعی، کلید عمومی کلاینت زیر را در سرور ثبت کنید)</div>
       <div class="pub-row"><span>نام کاربر</span><span>${esc(c.userName)}</span></div>
@@ -1133,34 +1131,32 @@ tr:hover td{background:#f8fafc}
     const gameKeys = X25519.generateKeyPair();
 
     const browseConf = [
-      `[Interface]`,
-      `PrivateKey = ${browseKeys.privateKey}`,
-      `Address = ${srv.address}`,
-      `DNS = ${DB.settings.dns}`,
-      `MTU = ${DB.settings.mtu}`,
-      ``,
-      `[Peer]`,
-      `PublicKey = ${srv.publicKey}`,
-      `AllowedIPs = 0.0.0.0/0, ::/0`,
-      `Endpoint = ${srv.endpoint}`,
-      `PersistentKeepalive = 20`
-    ].join("
-");
+      "[Interface]",
+      "PrivateKey = " + browseKeys.privateKey,
+      "Address = " + srv.address,
+      "DNS = " + DB.settings.dns,
+      "MTU = " + DB.settings.mtu,
+      "",
+      "[Peer]",
+      "PublicKey = " + srv.publicKey,
+      "AllowedIPs = 0.0.0.0/0, ::/0",
+      "Endpoint = " + srv.endpoint,
+      "PersistentKeepalive = 20"
+    ].join("\n");
 
     const gameConf = [
-      `[Interface]`,
-      `PrivateKey = ${gameKeys.privateKey}`,
-      `Address = ${srv.address}`,
-      `DNS = ${DB.settings.dns}`,
-      `MTU = ${DB.settings.mtu}`,
-      ``,
-      `[Peer]`,
-      `PublicKey = ${srv.publicKey}`,
-      `AllowedIPs = 0.0.0.0/0, ::/0`,
-      `Endpoint = ${srv.endpoint}`,
-      `PersistentKeepalive = 20`
-    ].join("
-");
+      "[Interface]",
+      "PrivateKey = " + gameKeys.privateKey,
+      "Address = " + srv.address,
+      "DNS = " + DB.settings.dns,
+      "MTU = " + DB.settings.mtu,
+      "",
+      "[Peer]",
+      "PublicKey = " + srv.publicKey,
+      "AllowedIPs = 0.0.0.0/0, ::/0",
+      "Endpoint = " + srv.endpoint,
+      "PersistentKeepalive = 20"
+    ].join("\n");
 
     document.getElementById("browseProfileInfo").innerHTML = `
       <div class="pub-row"><span>سرور متصل</span><span>${esc(srv.country)}</span></div>
