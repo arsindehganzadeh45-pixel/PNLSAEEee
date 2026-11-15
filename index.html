@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ULTRA WIREGUARD PANEL | پنل مدیریت حرفه‌ای</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{
+  --navy:#0f294a;
+  --petrol:#1d4ed8;
+  --sky:#0284c7;
+  --bg:#f4f7fb;
+  --white:#ffffff;
+  --text:#1e293b;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --green:#10b981;
+  --red:#ef4444;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Vazirmatn',Tahoma,sans-serif}
+body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+button,input,select,textarea{font-family:inherit;outline:none}
+button{cursor:pointer;transition:all 0.2s ease}
+
+/* Login Screen */
+#loginScreen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--navy) 0%,var(--petrol) 100%);padding:16px;
+}
+.login-card{
+  background:var(--white);width:100%;max-width:400px;border-radius:20px;
+  padding:30px 24px;box-shadow:0 20px 50px rgba(0,0,0,0.3);text-align:center;
+}
+.wg-logo{
+  width:64px;height:64px;margin:0 auto 14px;border-radius:16px;
+  background:linear-gradient(135deg,var(--navy),var(--sky));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;font-weight:900;
+}
+.login-card h1{font-size:1.25rem;color:var(--navy);margin-bottom:4px}
+.login-card p{font-size:0.82rem;color:var(--muted);margin-bottom:20px}
+.inp-group{text-align:right;margin-bottom:14px;position:relative}
+.inp-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+.inp-group input{
+  width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;
+  font-size:0.9rem;background:#f8fafc;
+}
+.inp-group input:focus{border-color:var(--sky);background:#fff}
+.login-err{
+  background:#fef2f2;color:var(--red);border:1px solid #fecaca;padding:8px;
+  border-radius:8px;font-size:0.8rem;margin-bottom:12px;display:none;
+}
+.btn-primary{
+  width:100%;padding:11px;border:none;border-radius:10px;
+  background:var(--navy);color:#fff;font-weight:700;font-size:0.9rem;
+}
+.btn-primary:hover{background:var(--petrol)}
+
+/* Public Subscription View */
+#publicSubView{
+  min-height:100vh;background:linear-gradient(145deg,#0f294a,#0a192f);
+  padding:20px 14px;display:none;align-items:center;justify-content:center;
+}
+.pub-card{
+  background:var(--white);width:100%;max-width:440px;border-radius:20px;
+  padding:22px;box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+.pub-row{
+  display:flex;justify-content:space-between;padding:10px 0;
+  border-bottom:1px solid var(--border);font-size:0.85rem;
+}
+.pub-row span:first-child{color:var(--muted)}
+.pub-row span:last-child{font-weight:700;color:var(--navy)}
+
+/* App Layout */
+#appLayout{display:none;min-height:100vh}
+.topbar{
+  position:fixed;top:0;right:0;left:0;height:60px;background:var(--white);
+  border-bottom:1px solid var(--border);display:flex;align-items:center;
+  justify-content:space-between;padding:0 16px;z-index:90;
+}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.hamburger{
+  width:38px;height:38px;border-radius:8px;border:1px solid var(--border);
+  background:var(--bg);color:var(--navy);font-size:1.2rem;display:flex;align-items:center;justify-content:center;
+}
+.brand-title{font-weight:800;font-size:1rem;color:var(--navy)}
+.user-pill{
+  background:#f1f5f9;padding:5px 10px;border-radius:999px;font-size:0.8rem;font-weight:700;color:var(--navy);
+}
+
+/* Sidebar */
+.sidebar-backdrop{
+  position:fixed;inset:0;background:rgba(15,41,74,0.4);z-index:95;
+  opacity:0;pointer-events:none;transition:0.3s;
+}
+.sidebar-backdrop.open{opacity:1;pointer-events:auto}
+.sidebar{
+  position:fixed;top:0;right:0;bottom:0;width:255px;background:var(--navy);
+  color:#fff;z-index:100;padding:18px 12px;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform 0.3s ease;
+}
+.sidebar.open{transform:translateX(0)}
+@media(min-width:992px){
+  .sidebar{transform:translateX(0)}
+  .main-content{margin-right:255px}
+  .hamburger{display:none}
+  .sidebar-backdrop{display:none}
+}
+.side-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:14px;
+}
+.side-menu{list-style:none;flex:1}
+.side-btn{
+  width:100%;text-align:right;padding:10px 12px;border-radius:10px;border:none;
+  background:transparent;color:#cbd5e1;font-size:0.88rem;font-weight:600;
+  display:flex;align-items:center;gap:10px;margin-bottom:4px;
+}
+.side-btn:hover,.side-btn.active{background:var(--sky);color:#fff}
+.side-logout{
+  margin-top:auto;padding:10px;border-radius:10px;border:none;
+  background:rgba(239,68,68,0.2);color:#fca5a5;font-weight:700;width:100%;
+}
+
+/* Main Content */
+.main-content{padding:80px 16px 24px;max-width:1200px}
+.page-sec{display:none}
+.page-sec.active{display:block}
+
+.sec-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.sec-header h2{font-size:1.15rem;color:var(--navy);font-weight:800}
+
+.panel-card{
+  background:var(--white);border-radius:var(--radius);padding:18px;
+  border:1px solid var(--border);box-shadow:0 4px 15px rgba(0,0,0,0.03);margin-bottom:16px;
+}
+.panel-card h3{font-size:0.98rem;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.field label{display:block;font-size:0.8rem;font-weight:600;color:var(--navy);margin-bottom:5px}
+.field input,.field select{
+  width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:9px;
+  font-size:0.88rem;background:#f8fafc;
+}
+
+.btn{
+  padding:8px 14px;border-radius:8px;border:none;font-size:0.82rem;font-weight:700;
+  display:inline-flex;align-items:center;gap:5px;
+}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-sky{background:var(--sky);color:#fff}
+.btn-green{background:var(--green);color:#fff}
+.btn-red{background:var(--red);color:#fff}
+.btn-outline{background:#fff;border:1px solid var(--border);color:var(--navy)}
+
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.83rem}
+th{background:#f8fafc;color:var(--navy);font-weight:700;text-align:right;padding:10px;border-bottom:2px solid var(--border)}
+td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
+
+.modal{
+  position:fixed;inset:0;background:rgba(15,41,74,0.6);z-index:200;
+  display:none;align-items:center;justify-content:center;padding:16px;
+}
+.modal.open{display:flex}
+.modal-box{
+  background:var(--white);border-radius:16px;width:100%;max-width:460px;
+  padding:20px;box-shadow:0 15px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto;
+}
+.conf-pre{
+  background:#0f172a;color:#38bdf8;padding:10px;border-radius:8px;
+  font-family:monospace;font-size:0.75rem;direction:ltr;text-align:left;
+  white-space:pre-wrap;word-break:break-all;margin:10px 0;
+}
+#qrBox{display:flex;justify-content:center;padding:12px;background:#fff;border:1px solid var(--border);border-radius:10px;margin:12px 0}
+
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--navy);color:#fff;padding:10px 20px;border-radius:999px;
+  font-size:0.82rem;font-weight:600;z-index:300;opacity:0;transition:0.3s;
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.ltr{direction:ltr;text-align:left;font-family:monospace}
+</style>
+</head>
+<body>
+
+<!-- صفحه عمومی اشتراک (بدون دکمه ورود به پنل) -->
+<div id="publicSubView">
+  <div class="pub-card">
+    <div style="text-align:center;margin-bottom:14px">
+      <div class="wg-logo" style="width:48px;height:48px;font-size:22px">🛡️</div>
+      <h2 style="color:var(--navy);font-size:1.1rem" id="pubTitle">اطلاعات اشتراک WireGuard</h2>
+    </div>
+    <div id="pubDetails"></div>
+    <div id="pubQr" style="display:flex;justify-content:center;margin:12px 0"></div>
+    <pre class="conf-pre" id="pubConfText"></pre>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button type="button" class="btn btn-navy" style="flex:1;justify-content:center" id="pubBtnDl">⬇️ دانلود فایل CONF</button>
+      <button type="button" class="btn btn-sky" style="flex:1;justify-content:center" id="pubBtnCopy">📋 کپی کانفیگ</button>
+    </div>
+  </div>
+</div>
+
+<!-- صفحه ورود -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="wg-logo">🛡️</div>
+    <h1>ULTRA WIREGUARD</h1>
+    <p>ورود یکپارچه مالک و ادمین‌های سیستم</p>
+    <div class="login-err" id="loginErr">نام کاربری یا رمز عبور اشتباه است.</div>
+    <form id="loginForm">
+      <div class="inp-group">
+        <label>نام کاربری</label>
+        <input type="text" id="loginUser" required autocomplete="username"/>
+      </div>
+      <div class="inp-group">
+        <label>رمز عبور</label>
+        <input type="password" id="loginPass" required autocomplete="current-password"/>
+      </div>
+      <button type="submit" class="btn-primary">ورود به پنل</button>
+    </form>
+  </div>
+</div>
+
+<!-- ساختار اصلی پنل -->
+<div id="appLayout">
+  <header class="topbar">
+    <div class="topbar-right">
+      <button type="button" class="hamburger" id="btnToggleMenu">☰</button>
+      <div class="brand-title">ULTRA WIREGUARD PANEL</div>
+    </div>
+    <div class="user-pill">
+      <span id="currentUserName">admin</span>
+    </div>
+  </header>
+
+  <div class="sidebar-backdrop" id="sideBackdrop"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="side-head">
+      <strong>🛡️ منوی مدیریت</strong>
+      <button type="button" id="btnCloseSide" style="background:none;border:none;color:#fff;font-size:1.1rem">✕</button>
+    </div>
+    <ul class="side-menu" style="list-style:none">
+      <li><button type="button" class="side-btn active" data-sec="create">➕ ساخت کانفیگ</button></li>
+      <li><button type="button" class="side-btn" data-sec="configs">📂 مدیریت کانفیگ‌ها</button></li>
+      <li class="owner-only"><button type="button" class="side-btn" data-sec="admins">👥 مدیریت ادمین‌ها</button></li>
+      <li class="owner-only"><button type="button" class="side-btn" data-sec="settings">⚙️ تنظیمات پنل</button></li>
+    </ul>
+    <button type="button" class="side-logout" id="btnLogout">🚪 خروج از حساب</button>
+  </aside>
+
+  <main class="main-content">
+
+    <!-- بخش ساخت کانفیگ -->
+    <section id="sec-create" class="page-sec active">
+      <div class="sec-header"><h2>➕ ساخت کانفیگ جدید</h2></div>
+      <div class="panel-card">
+        <form id="createCfgForm">
+          <div class="form-grid">
+            <div class="field">
+              <label>نام کاربر *</label>
+              <input type="text" id="cUser" placeholder="مثال: Heo" required/>
+            </div>
+            <div class="field">
+              <label>انتخاب کشور سرور</label>
+              <select id="cCountry">
+                <option value="آلمان" selected>🇩🇪 آلمان (اصلی)</option>
+                <option value="ترکیه">🇹🇷 ترکیه</option>
+                <option value="ایران">🇮🇷 ایران</option>
+                <option value="هلند">🇳🇱 هلند</option>
+                <option value="فرانسه">🇫🇷 فرانسه</option>
+                <option value="امارات">🇦🇪 امارات</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>حجم (گیگابایت)</label>
+              <input type="number" id="cVolume" min="1" max="2000" value="50" required/>
+            </div>
+            <div class="field">
+              <label>مدت اعتبار (روز)</label>
+              <input type="number" id="cDays" min="1" max="365" value="30" required/>
+            </div>
+          </div>
+          <button type="submit" id="btnSubmitCfg" class="btn btn-navy" style="margin-top:14px">✨ ساخت و دانلود کانفیگ</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- بخش مدیریت کانفیگ‌ها -->
+    <section id="sec-configs" class="page-sec">
+      <div class="sec-header"><h2>📂 لیست کانفیگ‌ها و لینک ساب</h2></div>
+      <div class="panel-card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>نام کاربر</th>
+                <th>کشور</th>
+                <th>IP اختصاصی</th>
+                <th>حجم / انقضا</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody id="configsTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- مدیریت ادمین‌ها (فقط مالک) -->
+    <section id="sec-admins" class="page-sec owner-only">
+      <div class="sec-header"><h2>👥 مدیریت ادمین‌ها</h2></div>
+      <div class="panel-card">
+        <h3>➕ افزودن ادمین جدید</h3>
+        <form id="addAdminForm">
+          <div class="form-grid">
+            <div class="field"><label>نام نمایشی</label><input type="text" id="aName" required placeholder="ادمین ۱"/></div>
+            <div class="field"><label>نام کاربری</label><input type="text" id="aUser" class="ltr" required/></div>
+            <div class="field"><label>رمز عبور</label><input type="text" id="aPass" class="ltr" required/></div>
+            <div class="field"><label>اعتبار (روز)</label><input type="number" id="aDays" value="30" required/></div>
+          </div>
+          <button type="submit" class="btn btn-navy" style="margin-top:10px">ثبت ادمین</button>
+        </form>
+      </div>
+      <div class="panel-card">
+        <h3>📋 ادمین‌های ثبت‌شده</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>نام</th><th>نام کاربری</th><th>اعتبار</th><th>عملیات</th></tr></thead>
+            <tbody id="adminsTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- تنظیمات پنل -->
+    <section id="sec-settings" class="page-sec owner-only">
+      <div class="sec-header"><h2>⚙️ تنظیمات اصلی</h2></div>
+      <div class="panel-card">
+        <form id="settingsForm">
+          <div class="form-grid">
+            <div class="field"><label>آدرس پایه پنل (Base URL)</label><input type="text" id="setBaseUrl" class="ltr" required/></div>
+            <div class="field"><label>تغییر رمز عبور مالک</label><input type="password" id="setOwnerPass" class="ltr" placeholder="رمز جدید..."/></div>
+          </div>
+          <button type="submit" class="btn btn-navy" style="margin-top:10px">ذخیره تنظیمات</button>
+        </form>
+        <div style="margin-top:16px">
+          <button type="button" class="btn btn-red" id="btnReset">⚠️ پاک کردن کل اطلاعات (Reset)</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- مودال نمایش جزئیات و QR -->
+<div class="modal" id="infoModal">
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h3 id="modalTitle" style="color:var(--navy);font-size:1rem">جزئیات کانفیگ</h3>
+      <button type="button" onclick="closeModal()" style="background:none;border:none;font-size:1.2rem">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  const STORAGE_KEY = "ultra_wg_panel_v4_data";
+  const SESSION_KEY = "ultra_wg_panel_v4_sess";
+
+  const SERVER_CONFIG = {
+    publicKey: "f9evqsqa8cawDQNTjQkU7vta415caGpye3YSH8zX+Sw=",
+    endpoint: "212.108.97.58:59621",
+    dns: "1.1.1.1,8.8.8.8,95.85.95.85,2.56.220.2,94.140.14.14,149.112.112.112",
+    mtu: 1300
+  };
+
+  let DB = {
+    settings: {
+      ownerUser: "admin",
+      ownerPass: "admin",
+      baseUrl: window.location.origin + window.location.pathname
+    },
+    admins: [],
+    configs: []
+  };
+
+  let CURRENT_USER = null;
+
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 3000);
+  }
+
+  function saveDB() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(DB));
+  }
+
+  function initDB() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      try { DB = JSON.parse(raw); } catch(e){}
+    }
+  }
+
+  function checkPublicSubRoute() {
+    const params = new URLSearchParams(window.location.search);
+    const subData = params.get("sub");
+    if (!subData) return false;
+
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("appLayout").style.display = "none";
+    document.getElementById("publicSubView").style.display = "flex";
+
+    try {
+      const jsonStr = decodeURIComponent(atob(subData));
+      const cfg = JSON.parse(jsonStr);
+
+      const remGB = Math.max(0, cfg.volumeGB - cfg.usedGB);
+      const remDays = Math.ceil((new Date(cfg.expiresAt).getTime() - Date.now()) / 86400000);
+
+      document.getElementById("pubTitle").textContent = "اشتراک کاربر: " + cfg.userName;
+      document.getElementById("pubDetails").innerHTML = `
+        <div class="pub-row"><span>کشور سرور</span><span>${cfg.country}</span></div>
+        <div class="pub-row"><span>IP اختصاصی</span><span class="ltr">172.26.6.${cfg.ipNum}</span></div>
+        <div class="pub-row"><span>حجم کل / مصرف</span><span>${cfg.volumeGB} GB / ${cfg.usedGB} GB</span></div>
+        <div class="pub-row"><span>حجم باقی‌مانده</span><span style="color:var(--sky)">${remGB} GB</span></div>
+        <div class="pub-row"><span>روزهای باقی‌مانده</span><span>${remDays > 0 ? remDays + ' روز' : 'منقضی شده'}</span></div>
+      `;
+
+      const confText = buildConfStr(cfg);
+      document.getElementById("pubConfText").textContent = confText;
+
+      const qrEl = document.getElementById("pubQr");
+      qrEl.innerHTML = "";
+      new QRCode(qrEl, { text: confText, width: 180, height: 180 });
+
+      document.getElementById("pubBtnDl").onclick = () => downloadConfFile(confText, cfg.userName);
+      document.getElementById("pubBtnCopy").onclick = () => { navigator.clipboard.writeText(confText); toast("✅ کپی شد"); };
+    } catch(e) {
+      document.getElementById("pubTitle").textContent = "خطا در بارگذاری اشتراک";
+      document.getElementById("pubDetails").innerHTML = "<p style='color:var(--red);text-align:center'>لینک ساب نامعتبر یا خراب است.</p>";
+      document.getElementById("pubConfText").style.display = "none";
+      document.getElementById("pubBtnDl").style.display = "none";
+      document.getElementById("pubBtnCopy").style.display = "none";
+    }
+    return true;
+  }
+
+  function generateWgKeys() {
+    const priv = new Uint8Array(32);
+    crypto.getRandomValues(priv);
+    priv[0] &= 248; priv[31] &= 127; priv[31] |= 64;
+    const pub = new Uint8Array(32);
+    crypto.getRandomValues(pub);
+    const toB64 = arr => btoa(String.fromCharCode.apply(null, arr));
+    return { privateKey: toB64(priv), publicKey: toB64(pub) };
+  }
+
+  function buildConfStr(c) {
+    return [
+      `[Interface]`,
+      `PrivateKey = ${c.privateKey}`,
+      `Address = 172.26.6.${c.ipNum}/32`,
+      `MTU = ${SERVER_CONFIG.mtu}`,
+      `DNS = ${SERVER_CONFIG.dns}`,
+      ``,
+      `[Peer]`,
+      `PublicKey = ${SERVER_CONFIG.publicKey}`,
+      `AllowedIPs = 0.0.0.0/0,::/0`,
+      `Endpoint = ${SERVER_CONFIG.endpoint}`,
+      `PersistentKeepalive = 20`
+    ].join("\n");
+  }
+
+  function downloadConfFile(text, userName) {
+    const safeName = String(userName || "config").replace(/[^a-zA-Z0-9_\u0600-\u06FF-]/g, "_");
+    const fullName = safeName.endsWith(".conf") ? safeName : safeName + ".conf";
+    const blob = new Blob([text], { type: "application/x-wg-config" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fullName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function getSubLink(c) {
+    const payload = btoa(encodeURIComponent(JSON.stringify(c)));
+    const base = DB.settings.baseUrl.split("?")[0];
+    return `${base}?sub=${payload}`;
+  }
+
+  document.getElementById("loginForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const u = document.getElementById("loginUser").value.trim();
+    const p = document.getElementById("loginPass").value;
+    const errBox = document.getElementById("loginErr");
+
+    if (u === DB.settings.ownerUser && p === DB.settings.ownerPass) {
+      CURRENT_USER = { role: "owner", name: "مالک (Admin)" };
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(CURRENT_USER));
+      enterApp();
+      return;
+    }
+
+    const adm = DB.admins.find(a => a.username === u && a.pass === p);
+    if (adm) {
+      CURRENT_USER = { role: "admin", id: adm.id, name: adm.name };
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(CURRENT_USER));
+      enterApp();
+      return;
+    }
+
+    errBox.style.display = "block";
+  });
+
+  function enterApp() {
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("appLayout").style.display = "block";
+    document.getElementById("currentUserName").textContent = CURRENT_USER.name;
+    document.querySelectorAll(".owner-only").forEach(el => {
+      el.style.display = CURRENT_USER.role === "owner" ? "" : "none";
+    });
+    renderAll();
+  }
+
+  document.getElementById("btnLogout").addEventListener("click", () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    location.reload();
+  });
+
+  const sidebar = document.getElementById("sidebar");
+  const backdrop = document.getElementById("sideBackdrop");
+  document.getElementById("btnToggleMenu").addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    backdrop.classList.toggle("open");
+  });
+  backdrop.addEventListener("click", () => {
+    sidebar.classList.remove("open");
+    backdrop.classList.remove("open");
+  });
+
+  window.navTo = function(secId) {
+    document.querySelectorAll(".side-btn").forEach(b => b.classList.toggle("active", b.dataset.sec === secId));
+    document.querySelectorAll(".page-sec").forEach(s => s.classList.toggle("active", s.id === "sec-" + secId));
+    sidebar.classList.remove("open");
+    backdrop.classList.remove("open");
+    renderAll();
+  };
+  document.querySelectorAll(".side-btn").forEach(btn => {
+    btn.addEventListener("click", () => navTo(btn.dataset.sec));
+  });
+
+  let isCreating = false;
+  document.getElementById("createCfgForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (isCreating) return;
+
+    const userName = document.getElementById("cUser").value.trim();
+    const country = document.getElementById("cCountry").value;
+    const volumeGB = parseInt(document.getElementById("cVolume").value, 10);
+    const days = parseInt(document.getElementById("cDays").value, 10);
+
+    isCreating = true;
+    const btn = document.getElementById("btnSubmitCfg");
+    btn.disabled = true;
+    btn.textContent = "در حال ساخت...";
+
+    try {
+      const keys = generateWgKeys();
+      const ipNum = Math.floor(2 + Math.random() * 250);
+      const now = new Date();
+      const exp = new Date(now.getTime() + days * 86400000);
+
+      const newCfg = {
+        id: "cfg_" + Math.random().toString(36).substring(2, 8),
+        userName,
+        country,
+        volumeGB,
+        usedGB: 0,
+        days,
+        ipNum,
+        privateKey: keys.privateKey,
+        createdAt: now.toISOString(),
+        expiresAt: exp.toISOString()
+      };
+
+      DB.configs.unshift(newCfg);
+      saveDB();
+
+      const confText = buildConfStr(newCfg);
+      downloadConfFile(confText, userName);
+
+      document.getElementById("createCfgForm").reset();
+      toast("✅ کانفیگ ساخته و فایل .conf دانلود شد");
+      navTo("configs");
+    } finally {
+      setTimeout(() => {
+        isCreating = false;
+        btn.disabled = false;
+        btn.textContent = "✨ ساخت و دانلود کانفیگ";
+      }, 500);
+    }
+  });
+
+  function renderConfigs() {
+    const tbody = document.getElementById("configsTbody");
+    if (!DB.configs.length) {
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:16px">کانفیگی ثبت نشده است</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = DB.configs.map(c => {
+      const subUrl = getSubLink(c);
+      return `
+        <tr>
+          <td><strong>${c.userName}</strong></td>
+          <td>${c.country}</td>
+          <td class="ltr">172.26.6.${c.ipNum}</td>
+          <td>${c.volumeGB} GB</td>
+          <td>
+            <button type="button" class="btn btn-navy btn-sm" onclick="showDetails('${c.id}')">👁️ جزئیات / QR</button>
+            <button type="button" class="btn btn-sky btn-sm" onclick="navigator.clipboard.writeText('${subUrl}');toast('✅ لینک ساب کپی شد')">🔗 ساب</button>
+            <button type="button" class="btn btn-red btn-sm" onclick="delConfig('${c.id}')">🗑️</button>
+          </td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  window.showDetails = function(id) {
+    const c = DB.configs.find(x => x.id === id);
+    if (!c) return;
+    const confStr = buildConfStr(c);
+    const subUrl = getSubLink(c);
+
+    document.getElementById("modalTitle").textContent = "جزئیات کانفیگ: " + c.userName;
+    document.getElementById("modalBody").innerHTML = `
+      <div style="font-size:0.85rem;margin-bottom:8px">لینک اشتراک (ساب):</div>
+      <input type="text" class="ltr" readonly value="${subUrl}" style="width:100%;padding:8px;font-size:0.75rem;margin-bottom:10px"/>
+      <div id="qrBox"></div>
+      <pre class="conf-pre">${confStr}</pre>
+      <button type="button" class="btn btn-navy" style="width:100%;margin-top:8px" onclick="downloadConfFile(\`${confStr}\`, '${c.userName}')">⬇️ دانلود فایل .conf</button>
+    `;
+    document.getElementById("infoModal").classList.add("open");
+    new QRCode(document.getElementById("qrBox"), { text: confStr, width: 200, height: 200 });
+  };
+
+  window.closeModal = function() {
+    document.getElementById("infoModal").classList.remove("open");
+  };
+
+  window.delConfig = function(id) {
+    if (confirm("حذف این کانفیگ؟")) {
+      DB.configs = DB.configs.filter(x => x.id !== id);
+      saveDB(); renderConfigs(); toast("🗑️ حذف شد");
+    }
+  };
+
+  document.getElementById("addAdminForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    DB.admins.push({
+      id: "adm_" + Math.random().toString(36).substring(2, 6),
+      name: document.getElementById("aName").value.trim(),
+      username: document.getElementById("aUser").value.trim(),
+      pass: document.getElementById("aPass").value
+    });
+    saveDB();
+    document.getElementById("addAdminForm").reset();
+    renderAdmins();
+    toast("✅ ادمین ثبت شد");
+  });
+
+  function renderAdmins() {
+    const tbody = document.getElementById("adminsTbody");
+    if (!DB.admins.length) {
+      tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:12px">ادمینی وجود ندارد</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = DB.admins.map(a => `
+      <tr>
+        <td>${a.name}</td>
+        <td class="ltr">${a.username}</td>
+        <td>فعال</td>
+        <td><button type="button" class="btn btn-red btn-sm" onclick="delAdmin('${a.id}')">حذف</button></td>
+      </tr>
+    `).join("");
+  }
+
+  window.delAdmin = function(id) {
+    DB.admins = DB.admins.filter(x => x.id !== id);
+    saveDB(); renderAdmins(); toast("🗑️ حذف شد");
+  };
+
+  document.getElementById("settingsForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    DB.settings.baseUrl = document.getElementById("setBaseUrl").value.trim();
+    const np = document.getElementById("setOwnerPass").value;
+    if (np) DB.settings.ownerPass = np;
+    saveDB();
+    toast("✅ تنظیمات ذخیره شد");
+  });
+
+  document.getElementById("btnReset").addEventListener("click", () => {
+    if (confirm("آیا کل اطلاعات پنل پاک شود؟")) {
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+  });
+
+  function renderAll() {
+    renderConfigs();
+    if (CURRENT_USER && CURRENT_USER.role === "owner") {
+      renderAdmins();
+      document.getElementById("setBaseUrl").value = DB.settings.baseUrl;
+    }
+  }
+
+  (function boot(){
+    initDB();
+    if (checkPublicSubRoute()) return;
+    const sess = sessionStorage.getItem(SESSION_KEY);
+    if (sess) {
+      try {
+        CURRENT_USER = JSON.parse(sess);
+        enterApp();
+      } catch(e){}
+    }
+  })();
+})();
+</script>
+</body>
+</html>
