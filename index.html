@@ -580,8 +580,8 @@ tr:hover td{background:#f8fafc}
 
 <script>
 (function(){
-  const STORAGE_KEY = "wg_pro_panel_v1_db";
-  const SESSION_KEY = "wg_pro_panel_v1_sess";
+  const STORAGE_KEY = "wg_pro_panel_v2_db";
+  const SESSION_KEY = "wg_pro_panel_v2_sess";
 
   // پیاده‌سازی استاندارد X25519 Scalar Multiplication برای مشتق کردن دقیق PublicKey از PrivateKey
   const X25519 = (function(){
@@ -751,6 +751,7 @@ tr:hover td{background:#f8fafc}
     return d > 0 ? d : 0;
   }
 
+  // اصلاح قطعی ساختار کانفیگ جهت جلوگیری از به هم ریختگی AllowedIPs در موبایل
   function buildWireGuardConf(cfg) {
     const srv = DB.servers.find(s => s.id === cfg.serverId) || DB.servers[0];
     return [
@@ -1404,21 +1405,21 @@ tr:hover td{background:#f8fafc}
   });
 
   document.getElementById("inpRestore").addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const parsed = JSON.parse(reader.result);
-        if (parsed && parsed.settings && parsed.servers) {
-          DB = parsed;
-          saveDB();
-          renderAll();
-          toast("✅ اطلاعات بازیابی شد");
-        } else toast("❌ فایل پشتیبان نامعتبر است");
-      } catch (err) { toast("❌ خطا در خواندن فایل"); }
-    };
-    reader.readAsText(file);
+    e.target.files[0] && (function(file){
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const parsed = JSON.parse(reader.result);
+          if (parsed && parsed.settings && parsed.servers) {
+            DB = parsed;
+            saveDB();
+            renderAll();
+            toast("✅ اطلاعات بازیابی شد");
+          } else toast("❌ فایل پشتیبان نامعتبر است");
+        } catch (err) { toast("❌ خطا در خواندن فایل"); }
+      };
+      reader.readAsText(file);
+    })(e.target.files[0]);
   });
 
   document.getElementById("btnResetAll").addEventListener("click", () => {
