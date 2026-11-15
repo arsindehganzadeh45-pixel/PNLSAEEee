@@ -3,73 +3,80 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>ULTRA WIREGUARD PANEL | پنل مدیریت حرفه‌ای</title>
+<title>WireGuard Professional Panel | پنل مدیریت حرفه‌ای وایرگارد</title>
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 :root{
-  --navy:#0f294a;
+  --navy:#0a192f;
+  --navy-light:#112240;
   --petrol:#1d4ed8;
   --sky:#0284c7;
+  --green:#10b981;
+  --red:#ef4444;
+  --amber:#f59e0b;
+  --purple:#7c3aed;
   --bg:#f4f7fb;
   --white:#ffffff;
   --text:#1e293b;
   --muted:#64748b;
   --border:#e2e8f0;
-  --green:#10b981;
-  --red:#ef4444;
   --radius:14px;
+  --shadow:0 4px 20px rgba(10,25,47,0.06);
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Vazirmatn',Tahoma,sans-serif}
 body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 button,input,select,textarea{font-family:inherit;outline:none}
 button{cursor:pointer;transition:all 0.2s ease}
+button:active{transform:scale(0.97)}
 
 /* Login Screen */
 #loginScreen{
   min-height:100vh;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,var(--navy) 0%,var(--petrol) 100%);padding:16px;
+  background:linear-gradient(135deg,var(--navy) 0%,#16325c 100%);padding:16px;
 }
 .login-card{
-  background:var(--white);width:100%;max-width:400px;border-radius:20px;
-  padding:30px 24px;box-shadow:0 20px 50px rgba(0,0,0,0.3);text-align:center;
+  background:var(--white);width:100%;max-width:410px;border-radius:20px;
+  padding:32px 26px;box-shadow:0 20px 50px rgba(0,0,0,0.3);text-align:center;
 }
 .wg-logo{
-  width:64px;height:64px;margin:0 auto 14px;border-radius:16px;
+  width:66px;height:66px;margin:0 auto 14px;border-radius:18px;
   background:linear-gradient(135deg,var(--navy),var(--sky));
-  display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px;
+  box-shadow:0 8px 20px rgba(2,132,199,0.3);
 }
-.login-card h1{font-size:1.25rem;color:var(--navy);margin-bottom:4px}
-.login-card p{font-size:0.82rem;color:var(--muted);margin-bottom:20px}
+.login-card h1{font-size:1.3rem;color:var(--navy);margin-bottom:6px;font-weight:800}
+.login-card p{font-size:0.84rem;color:var(--muted);margin-bottom:22px}
 .inp-group{text-align:right;margin-bottom:14px;position:relative}
-.inp-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+.inp-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--navy);margin-bottom:6px}
 .inp-group input{
-  width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;
-  font-size:0.9rem;background:#f8fafc;
+  width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:11px;
+  font-size:0.9rem;background:#f8fafc;transition:0.2s;
 }
 .inp-group input:focus{border-color:var(--sky);background:#fff}
 .login-err{
-  background:#fef2f2;color:var(--red);border:1px solid #fecaca;padding:8px;
-  border-radius:8px;font-size:0.8rem;margin-bottom:12px;display:none;
+  background:#fef2f2;color:var(--red);border:1px solid #fecaca;padding:9px;
+  border-radius:10px;font-size:0.82rem;margin-bottom:14px;display:none;
 }
 .btn-primary{
-  width:100%;padding:11px;border:none;border-radius:10px;
-  background:var(--navy);color:#fff;font-weight:700;font-size:0.9rem;
+  width:100%;padding:12px;border:none;border-radius:12px;
+  background:linear-gradient(135deg,var(--navy),var(--petrol));
+  color:#fff;font-weight:700;font-size:0.94rem;box-shadow:0 6px 16px rgba(29,78,216,0.25);
 }
-.btn-primary:hover{background:var(--petrol)}
+.btn-primary:hover{opacity:0.95;transform:translateY(-1px)}
 
 /* Public Subscription View */
 #publicSubView{
-  min-height:100vh;background:linear-gradient(145deg,#0f294a,#0a192f);
+  min-height:100vh;background:linear-gradient(145deg,var(--navy),#112240);
   padding:20px 14px;display:none;align-items:center;justify-content:center;
 }
 .pub-card{
-  background:var(--white);width:100%;max-width:440px;border-radius:20px;
-  padding:22px;box-shadow:0 20px 40px rgba(0,0,0,0.4);
+  background:var(--white);width:100%;max-width:460px;border-radius:20px;
+  padding:24px;box-shadow:0 20px 50px rgba(0,0,0,0.4);
 }
 .pub-row{
-  display:flex;justify-content:space-between;padding:10px 0;
-  border-bottom:1px solid var(--border);font-size:0.85rem;
+  display:flex;justify-content:space-between;align-items:center;padding:10px 0;
+  border-bottom:1px solid var(--border);font-size:0.86rem;
 }
 .pub-row span:first-child{color:var(--muted)}
 .pub-row span:last-child{font-weight:700;color:var(--navy)}
@@ -77,110 +84,189 @@ button{cursor:pointer;transition:all 0.2s ease}
 /* App Layout */
 #appLayout{display:none;min-height:100vh}
 .topbar{
-  position:fixed;top:0;right:0;left:0;height:60px;background:var(--white);
+  position:fixed;top:0;right:0;left:0;height:64px;background:var(--white);
   border-bottom:1px solid var(--border);display:flex;align-items:center;
-  justify-content:space-between;padding:0 16px;z-index:90;
+  justify-content:space-between;padding:0 18px;z-index:90;box-shadow:0 2px 10px rgba(0,0,0,0.03);
 }
 .topbar-right{display:flex;align-items:center;gap:12px}
 .hamburger{
-  width:38px;height:38px;border-radius:8px;border:1px solid var(--border);
-  background:var(--bg);color:var(--navy);font-size:1.2rem;display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:10px;border:1px solid var(--border);
+  background:var(--bg);color:var(--navy);font-size:1.25rem;display:flex;align-items:center;justify-content:center;
 }
-.brand-title{font-weight:800;font-size:1rem;color:var(--navy)}
+.hamburger:hover{background:var(--navy);color:#fff}
+.brand-title{font-weight:800;font-size:1.05rem;color:var(--navy)}
+.brand-sub{font-size:0.75rem;color:var(--sky);font-weight:600}
 .user-pill{
-  background:#f1f5f9;padding:5px 10px;border-radius:999px;font-size:0.8rem;font-weight:700;color:var(--navy);
+  display:flex;align-items:center;gap:8px;background:#f1f5f9;padding:6px 12px;
+  border-radius:999px;font-size:0.82rem;font-weight:700;color:var(--navy);
 }
+.role-tag{background:var(--navy);color:#fff;padding:2px 8px;border-radius:999px;font-size:0.72rem}
 
 /* Sidebar */
 .sidebar-backdrop{
-  position:fixed;inset:0;background:rgba(15,41,74,0.4);z-index:95;
-  opacity:0;pointer-events:none;transition:0.3s;
+  position:fixed;inset:0;background:rgba(10,25,47,0.45);z-index:95;
+  opacity:0;pointer-events:none;transition:opacity 0.3s ease;
 }
 .sidebar-backdrop.open{opacity:1;pointer-events:auto}
 .sidebar{
-  position:fixed;top:0;right:0;bottom:0;width:255px;background:var(--navy);
-  color:#fff;z-index:100;padding:18px 12px;display:flex;flex-direction:column;
-  transform:translateX(100%);transition:transform 0.3s ease;
+  position:fixed;top:0;right:0;bottom:0;width:265px;background:var(--navy);
+  color:#fff;z-index:100;padding:20px 14px;display:flex;flex-direction:column;
+  transform:translateX(0);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  box-shadow:-6px 0 25px rgba(0,0,0,0.18);
 }
-.sidebar.open{transform:translateX(0)}
-@media(min-width:992px){
-  .sidebar{transform:translateX(0)}
-  .main-content{margin-right:255px}
-  .hamburger{display:none}
-  .sidebar-backdrop{display:none}
+@media(max-width:992px){
+  .sidebar{transform:translateX(100%)}
+  .sidebar.open{transform:translateX(0)}
+}
+@media(min-width:993px){
+  .sidebar.collapsed{transform:translateX(100%)}
+  .main-content{margin-right:265px;transition:margin-right 0.3s ease}
+  .main-content.expanded{margin-right:0}
 }
 .side-head{
   display:flex;align-items:center;justify-content:space-between;
-  padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:14px;
+  padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:14px;
 }
-.side-menu{list-style:none;flex:1}
+.side-menu{list-style:none;flex:1;overflow-y:auto}
+.side-menu li{margin-bottom:5px}
 .side-btn{
-  width:100%;text-align:right;padding:10px 12px;border-radius:10px;border:none;
+  width:100%;text-align:right;padding:11px 14px;border-radius:11px;border:none;
   background:transparent;color:#cbd5e1;font-size:0.88rem;font-weight:600;
-  display:flex;align-items:center;gap:10px;margin-bottom:4px;
+  display:flex;align-items:center;gap:10px;
 }
-.side-btn:hover,.side-btn.active{background:var(--sky);color:#fff}
+.side-btn:hover{background:rgba(255,255,255,0.08);color:#fff}
+.side-btn.active{background:linear-gradient(135deg,var(--sky),var(--petrol));color:#fff;box-shadow:0 4px 12px rgba(2,132,199,0.35)}
 .side-logout{
-  margin-top:auto;padding:10px;border-radius:10px;border:none;
-  background:rgba(239,68,68,0.2);color:#fca5a5;font-weight:700;width:100%;
+  margin-top:auto;padding:11px;border-radius:11px;border:1px solid rgba(239,68,68,0.4);
+  background:rgba(239,68,68,0.12);color:#fca5a5;font-weight:700;width:100%;
 }
+.side-logout:hover{background:var(--red);color:#fff}
 
 /* Main Content */
-.main-content{padding:80px 16px 24px;max-width:1200px}
-.page-sec{display:none}
+.main-content{padding:84px 18px 30px;max-width:1300px}
+.page-sec{display:none;animation:fadeIn 0.25s ease}
 .page-sec.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-.sec-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.sec-header h2{font-size:1.15rem;color:var(--navy);font-weight:800}
+.sec-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.sec-header h2{font-size:1.2rem;color:var(--navy);font-weight:800}
+
+/* Cards & Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px}
+.stat-card{
+  background:var(--white);border-radius:var(--radius);padding:16px;
+  border:1px solid var(--border);box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;
+}
+.stat-icon{
+  width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:1.3rem;flex-shrink:0;
+}
+.ic-navy{background:#e0e7ff;color:var(--navy)}
+.ic-green{background:#d1fae5;color:var(--green)}
+.ic-red{background:#fee2e2;color:var(--red)}
+.ic-sky{background:#e0f2fe;color:var(--sky)}
+.ic-purple{background:#ede9fe;color:var(--purple)}
+.stat-info span{display:block;font-size:0.78rem;color:var(--muted)}
+.stat-info strong{font-size:1.2rem;color:var(--navy);font-weight:800}
 
 .panel-card{
-  background:var(--white);border-radius:var(--radius);padding:18px;
-  border:1px solid var(--border);box-shadow:0 4px 15px rgba(0,0,0,0.03);margin-bottom:16px;
+  background:var(--white);border-radius:var(--radius);padding:20px;
+  border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:18px;
 }
-.panel-card h3{font-size:0.98rem;color:var(--navy);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.panel-card h3{font-size:1rem;color:var(--navy);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 
-.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.field label{display:block;font-size:0.8rem;font-weight:600;color:var(--navy);margin-bottom:5px}
-.field input,.field select{
-  width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:9px;
-  font-size:0.88rem;background:#f8fafc;
+.alert-banner{
+  background:#fffbeb;border:1px solid #fde68a;color:#92400e;padding:12px 16px;
+  border-radius:12px;font-size:0.84rem;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
+}
+.info-note{
+  background:#f0f9ff;border:1px solid #bae6fd;color:#075985;padding:11px 14px;
+  border-radius:10px;font-size:0.82rem;margin-bottom:14px;line-height:1.6;
 }
 
+/* Forms */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.field label{display:block;font-size:0.8rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+.field input,.field select,.field textarea{
+  width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;
+  font-size:0.88rem;background:#f8fafc;color:var(--text);
+}
+.field input:focus,.field select:focus{border-color:var(--sky);background:#fff}
+
+/* Buttons */
 .btn{
-  padding:8px 14px;border-radius:8px;border:none;font-size:0.82rem;font-weight:700;
-  display:inline-flex;align-items:center;gap:5px;
+  padding:8px 14px;border-radius:9px;border:none;font-size:0.82rem;font-weight:700;
+  display:inline-flex;align-items:center;gap:6px;
 }
 .btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:#16325c}
 .btn-sky{background:var(--sky);color:#fff}
+.btn-sky:hover{background:#0369a1}
 .btn-green{background:var(--green);color:#fff}
+.btn-amber{background:var(--amber);color:#fff}
+.btn-purple{background:var(--purple);color:#fff}
 .btn-red{background:var(--red);color:#fff}
 .btn-outline{background:#fff;border:1px solid var(--border);color:var(--navy)}
+.btn-outline:hover{background:#f1f5f9}
+.btn-sm{padding:6px 10px;font-size:0.76rem}
 
+.badge{padding:3px 10px;border-radius:999px;font-size:0.74rem;font-weight:700;display:inline-block}
+.b-green{background:#d1fae5;color:#065f46}
+.b-red{background:#fee2e2;color:#991b1b}
+.b-sky{background:#e0f2fe;color:#075985}
+.b-amber{background:#fef3c7;color:#92400e}
+.b-purple{background:#ede9fe;color:#5b21b6}
+
+/* Responsive Table */
 .table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:0.83rem}
-th{background:#f8fafc;color:var(--navy);font-weight:700;text-align:right;padding:10px;border-bottom:2px solid var(--border)}
-td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
+table{width:100%;border-collapse:collapse;font-size:0.84rem}
+th{background:#f8fafc;color:var(--navy);font-weight:700;text-align:right;padding:11px 10px;border-bottom:2px solid var(--border)}
+td{padding:11px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:hover td{background:#f8fafc}
+.act-btns{display:flex;flex-wrap:wrap;gap:5px}
 
+@media(max-width:768px){
+  table,thead,tbody,th,td,tr{display:block}
+  thead{display:none}
+  tr{
+    background:#fff;border:1px solid var(--border);border-radius:12px;
+    padding:12px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.03);
+  }
+  td{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:7px 4px;border-bottom:1px dashed #e2e8f0;text-align:left;
+  }
+  td:last-child{border-bottom:none;padding-top:10px;justify-content:flex-start}
+  td::before{content:attr(data-label);font-weight:700;color:var(--navy);text-align:right;margin-left:10px}
+}
+
+/* Modal */
 .modal{
-  position:fixed;inset:0;background:rgba(15,41,74,0.6);z-index:200;
+  position:fixed;inset:0;background:rgba(10,25,47,0.65);z-index:200;
   display:none;align-items:center;justify-content:center;padding:16px;
 }
 .modal.open{display:flex}
 .modal-box{
-  background:var(--white);border-radius:16px;width:100%;max-width:460px;
-  padding:20px;box-shadow:0 15px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto;
+  background:var(--white);border-radius:18px;width:100%;max-width:500px;
+  padding:22px;box-shadow:0 20px 50px rgba(0,0,0,0.28);max-height:90vh;overflow-y:auto;
 }
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.close-modal{background:none;border:none;font-size:1.3rem;color:var(--muted)}
 .conf-pre{
-  background:#0f172a;color:#38bdf8;padding:10px;border-radius:8px;
-  font-family:monospace;font-size:0.75rem;direction:ltr;text-align:left;
+  background:#0f172a;color:#38bdf8;padding:12px;border-radius:10px;
+  font-family:monospace;font-size:0.78rem;direction:ltr;text-align:left;
   white-space:pre-wrap;word-break:break-all;margin:10px 0;
 }
-#qrBox{display:flex;justify-content:center;padding:12px;background:#fff;border:1px solid var(--border);border-radius:10px;margin:12px 0}
+#qrBox,#pubQr,#browseQr,#gameQr{
+  display:flex;justify-content:center;padding:14px;background:#fff;
+  border:1px solid var(--border);border-radius:12px;margin:12px 0;
+}
 
 .toast{
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);
-  background:var(--navy);color:#fff;padding:10px 20px;border-radius:999px;
-  font-size:0.82rem;font-weight:600;z-index:300;opacity:0;transition:0.3s;
+  position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--navy);color:#fff;padding:11px 22px;border-radius:999px;
+  font-size:0.84rem;font-weight:600;z-index:300;opacity:0;transition:0.3s;
+  box-shadow:0 10px 25px rgba(10,25,47,0.3);
 }
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .ltr{direction:ltr;text-align:left;font-family:monospace}
@@ -188,19 +274,35 @@ td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
 </head>
 <body>
 
-<!-- صفحه عمومی اشتراک (بدون دکمه ورود به پنل) -->
+<!-- صفحه عمومی اشتراک (Subscription مستقل با رمزگشایی AES-GCM) -->
 <div id="publicSubView">
   <div class="pub-card">
-    <div style="text-align:center;margin-bottom:14px">
-      <div class="wg-logo" style="width:48px;height:48px;font-size:22px">🛡️</div>
-      <h2 style="color:var(--navy);font-size:1.1rem" id="pubTitle">اطلاعات اشتراک WireGuard</h2>
+    <div style="text-align:center;margin-bottom:16px">
+      <div class="wg-logo" style="width:54px;height:54px;font-size:24px">🛡️</div>
+      <h2 style="color:var(--navy);font-size:1.15rem" id="pubTitle">صفحه اشتراک WireGuard</h2>
+      <span class="badge b-sky" id="pubSubBadge">لینک اشتراک رمزنگاری‌شده</span>
     </div>
-    <div id="pubDetails"></div>
-    <div id="pubQr" style="display:flex;justify-content:center;margin:12px 0"></div>
-    <pre class="conf-pre" id="pubConfText"></pre>
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <button type="button" class="btn btn-navy" style="flex:1;justify-content:center" id="pubBtnDl">⬇️ دانلود فایل CONF</button>
-      <button type="button" class="btn btn-sky" style="flex:1;justify-content:center" id="pubBtnCopy">📋 کپی کانفیگ</button>
+
+    <!-- فرم دریافت رمز اشتراک -->
+    <div id="pubUnlockBox">
+      <div class="info-note">این اشتراک با رمزنگاری استاندارد محافظت شده است. برای مشاهده مشخصات، دریافت QR Code و دانلود فایل کانفیگ، رمز اشتراک را وارد کنید.</div>
+      <div class="inp-group">
+        <label>رمز اشتراک (Subscription Password)</label>
+        <input type="password" id="pubPassInput" class="ltr" placeholder="رمز اشتراک را وارد کنید..."/>
+      </div>
+      <div class="login-err" id="pubPassErr">رمز اشتراک اشتباه است یا لینک آسیب دیده است.</div>
+      <button type="button" class="btn-primary" id="btnUnlockSub">🔓 بازگشایی اشتراک</button>
+    </div>
+
+    <!-- محتوای رمزگشایی‌شده اشتراک -->
+    <div id="pubUnlockedContent" style="display:none">
+      <div id="pubDetails"></div>
+      <div id="pubQr"></div>
+      <pre class="conf-pre" id="pubConfText"></pre>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+        <button type="button" class="btn btn-navy" style="flex:1;justify-content:center" id="pubBtnDl">⬇️ دانلود فایل .conf</button>
+        <button type="button" class="btn btn-sky" style="flex:1;justify-content:center" id="pubBtnCopy">📋 کپی کانفیگ</button>
+      </div>
     </div>
   </div>
 </div>
@@ -209,19 +311,19 @@ td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
 <div id="loginScreen">
   <div class="login-card">
     <div class="wg-logo">🛡️</div>
-    <h1>ULTRA WIREGUARD</h1>
+    <h1 id="loginPanelName">WireGuard Professional Panel</h1>
     <p>ورود یکپارچه مالک و ادمین‌های سیستم</p>
-    <div class="login-err" id="loginErr">نام کاربری یا رمز عبور اشتباه است.</div>
+    <div class="login-err" id="loginErr">نام کاربری یا رمز عبور اشتباه است یا حساب غیرفعال می‌باشد.</div>
     <form id="loginForm">
       <div class="inp-group">
         <label>نام کاربری</label>
-        <input type="text" id="loginUser" required autocomplete="username"/>
+        <input type="text" id="loginUser" placeholder="نام کاربری" required autocomplete="username"/>
       </div>
       <div class="inp-group">
         <label>رمز عبور</label>
-        <input type="password" id="loginPass" required autocomplete="current-password"/>
+        <input type="password" id="loginPass" placeholder="رمز عبور" required autocomplete="current-password"/>
       </div>
-      <button type="submit" class="btn-primary">ورود به پنل</button>
+      <button type="submit" class="btn-primary">ورود به پنل مدیریت</button>
     </form>
   </div>
 </div>
@@ -230,78 +332,149 @@ td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
 <div id="appLayout">
   <header class="topbar">
     <div class="topbar-right">
-      <button type="button" class="hamburger" id="btnToggleMenu">☰</button>
-      <div class="brand-title">ULTRA WIREGUARD PANEL</div>
+      <button type="button" class="hamburger" id="btnToggleMenu" title="منو">☰</button>
+      <div>
+        <div class="brand-title" id="topBrandTitle">WireGuard Professional Panel</div>
+        <div class="brand-sub">مدیریت پروفایل‌ها و لینک اشتراک امن</div>
+      </div>
     </div>
     <div class="user-pill">
       <span id="currentUserName">admin</span>
+      <span class="role-tag" id="currentUserRole">مالک</span>
     </div>
   </header>
 
   <div class="sidebar-backdrop" id="sideBackdrop"></div>
   <aside class="sidebar" id="sidebar">
     <div class="side-head">
-      <strong>🛡️ منوی مدیریت</strong>
-      <button type="button" id="btnCloseSide" style="background:none;border:none;color:#fff;font-size:1.1rem">✕</button>
+      <strong style="font-size:1rem;color:#38bdf8">🛡️ منوی پنل</strong>
+      <button type="button" id="btnCloseSide" style="background:none;border:none;color:#fff;font-size:1.2rem">✕</button>
     </div>
-    <ul class="side-menu" style="list-style:none">
-      <li><button type="button" class="side-btn active" data-sec="create">➕ ساخت کانفیگ</button></li>
-      <li><button type="button" class="side-btn" data-sec="configs">📂 مدیریت کانفیگ‌ها</button></li>
+    <ul class="side-menu">
+      <li><button type="button" class="side-btn active" data-sec="dash">📊 داشبورد اصلی</button></li>
+      <li><button type="button" class="side-btn" data-sec="create">➕ ساخت کانفیگ</button></li>
+      <li><button type="button" class="side-btn" data-sec="profiles">🌐 پروفایل وب‌گردی و گیم</button></li>
+      <li><button type="button" class="side-btn" data-sec="configs">📂 مدیریت کانفیگ‌ها و ساب</button></li>
       <li class="owner-only"><button type="button" class="side-btn" data-sec="admins">👥 مدیریت ادمین‌ها</button></li>
-      <li class="owner-only"><button type="button" class="side-btn" data-sec="settings">⚙️ تنظیمات پنل</button></li>
+      <li class="owner-only"><button type="button" class="side-btn" data-sec="settings">⚙️ تنظیمات و سرورها</button></li>
     </ul>
     <button type="button" class="side-logout" id="btnLogout">🚪 خروج از حساب</button>
   </aside>
 
-  <main class="main-content">
+  <main class="main-content" id="mainContent">
 
-    <!-- بخش ساخت کانفیگ -->
-    <section id="sec-create" class="page-sec active">
-      <div class="sec-header"><h2>➕ ساخت کانفیگ جدید</h2></div>
+    <!-- هشدار تغییر رمز پیش‌فرض -->
+    <div class="alert-banner" id="defaultPassAlert" style="display:none">
+      <span>⚠️ <strong>هشدار امنیتی:</strong> شما هنوز از رمز عبور پیش‌فرض (admin) استفاده می‌کنید. لطفاً از بخش تنظیمات رمز خود را تغییر دهید.</span>
+      <button type="button" class="btn btn-amber btn-sm" onclick="navTo('settings')">تغییر رمز عبور</button>
+    </div>
+
+    <!-- 1. داشبورد اصلی -->
+    <section id="sec-dash" class="page-sec active">
+      <div class="sec-header">
+        <h2>📊 داشبورد و وضعیت سیستم</h2>
+        <button type="button" class="btn btn-sky" onclick="navTo('create')">➕ ساخت کانفیگ جدید</button>
+      </div>
+      <div class="stats-grid" id="dashStats"></div>
       <div class="panel-card">
+        <h3>🖥️ وضعیت سرور اصلی و پروفایل‌ها</h3>
+        <div id="dashServerSummary"></div>
+      </div>
+    </section>
+
+    <!-- 2. بخش ساخت کانفیگ -->
+    <section id="sec-create" class="page-sec">
+      <div class="sec-header"><h2>➕ ساخت کانفیگ جدید (آماده‌سازی فایل)</h2></div>
+      <div class="panel-card">
+        <div class="info-note">
+          <strong>نکته فنی شبکه:</strong> در نسخه بدون Backend، تمام فایل‌های خروجی از مشخصات و آدرس شبکه واقعی سرور اصلی (<code>172.26.6.23/32</code>) استفاده می‌کنند. برای اتصال مستقل کاربران جدید، ثبت <code>PublicKey</code> مشتق‌شده کلاینت در تنظیمات سمت سرور ضروری است.
+        </div>
         <form id="createCfgForm">
           <div class="form-grid">
             <div class="field">
               <label>نام کاربر *</label>
-              <input type="text" id="cUser" placeholder="مثال: Heo" required/>
+              <input type="text" id="cUser" placeholder="مثال: Ali" required/>
             </div>
             <div class="field">
-              <label>انتخاب کشور سرور</label>
-              <select id="cCountry">
-                <option value="آلمان" selected>🇩🇪 آلمان (اصلی)</option>
-                <option value="ترکیه">🇹🇷 ترکیه</option>
-                <option value="ایران">🇮🇷 ایران</option>
-                <option value="هلند">🇳🇱 هلند</option>
-                <option value="فرانسه">🇫🇷 فرانسه</option>
-                <option value="امارات">🇦🇪 امارات</option>
+              <label>نام کانفیگ *</label>
+              <input type="text" id="cTitle" placeholder="مثال: Germany-Pro" required/>
+            </div>
+            <div class="field">
+              <label>انتخاب نوع استفاده *</label>
+              <select id="cUsageType">
+                <option value="وب‌گردی">🌐 وب‌گردی (Web Browsing)</option>
+                <option value="گیم">🎮 گیم (Gaming)</option>
               </select>
             </div>
             <div class="field">
-              <label>حجم (گیگابایت)</label>
-              <input type="number" id="cVolume" min="1" max="2000" value="50" required/>
+              <label>انتخاب سرور / کشور *</label>
+              <select id="cServer" required></select>
             </div>
             <div class="field">
-              <label>مدت اعتبار (روز)</label>
+              <label>حجم (گیگابایت) *</label>
+              <input type="number" id="cVolume" min="1" max="5000" value="50" required/>
+            </div>
+            <div class="field">
+              <label>مدت اعتبار (روز) *</label>
               <input type="number" id="cDays" min="1" max="365" value="30" required/>
             </div>
+            <div class="field">
+              <label>تعداد کاربر (پیش‌فرض ۱)</label>
+              <input type="number" id="cUsersCount" min="1" max="10" value="1" required/>
+            </div>
+            <div class="field">
+              <label>رمز اختصاصی لینک اشتراک (Subscription) *</label>
+              <input type="text" id="cSubPass" class="ltr" placeholder="مثال: 123456" required/>
+            </div>
           </div>
-          <button type="submit" id="btnSubmitCfg" class="btn btn-navy" style="margin-top:14px">✨ ساخت و دانلود کانفیگ</button>
+          <div style="margin-top:18px">
+            <button type="submit" id="btnSubmitCfg" class="btn btn-navy" style="padding:11px 22px">✨ تولید کانفیگ و نمایش جزئیات</button>
+          </div>
         </form>
       </div>
     </section>
 
-    <!-- بخش مدیریت کانفیگ‌ها -->
+    <!-- 3. بخش پروفایل‌های وب‌گردی و گیم -->
+    <section id="sec-profiles" class="page-sec">
+      <div class="sec-header"><h2>🌐 پروفایل‌های مستقیم وب‌گردی و گیم (متصل به سرور اصلی)</h2></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+        <!-- کارت وب‌گردی -->
+        <div class="panel-card">
+          <h3>🌐 پروفایل وب‌گردی (Web Browsing)</h3>
+          <div id="browseProfileInfo"></div>
+          <div id="browseQr"></div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button type="button" class="btn btn-navy" style="flex:1;justify-content:center" id="btnDlBrowse">⬇️ دانلود فایل .conf</button>
+            <button type="button" class="btn btn-sky" style="flex:1;justify-content:center" id="btnCopyBrowse">📋 کپی کانفیگ</button>
+          </div>
+        </div>
+
+        <!-- کارت گیم -->
+        <div class="panel-card">
+          <h3>🎮 پروفایل گیم (Gaming)</h3>
+          <div id="gameProfileInfo"></div>
+          <div id="gameQr"></div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button type="button" class="btn btn-navy" style="flex:1;justify-content:center" id="btnDlGame">⬇️ دانلود فایل .conf</button>
+            <button type="button" class="btn btn-sky" style="flex:1;justify-content:center" id="btnCopyGame">📋 کپی کانفیگ</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. بخش مدیریت کانفیگ‌ها و لینک ساب -->
     <section id="sec-configs" class="page-sec">
-      <div class="sec-header"><h2>📂 لیست کانفیگ‌ها و لینک ساب</h2></div>
+      <div class="sec-header"><h2>📂 مدیریت کانفیگ‌ها و لینک‌های اشتراک</h2></div>
       <div class="panel-card">
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>نام کاربر</th>
-                <th>کشور</th>
-                <th>IP اختصاصی</th>
-                <th>حجم / انقضا</th>
+                <th>کاربر / کانفیگ</th>
+                <th>نوع سرویس</th>
+                <th>سرور / IP</th>
+                <th>حجم / اعتبار</th>
+                <th>وضعیت لینک ساب</th>
                 <th>عملیات</th>
               </tr>
             </thead>
@@ -311,45 +484,80 @@ td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
       </div>
     </section>
 
-    <!-- مدیریت ادمین‌ها (فقط مالک) -->
+    <!-- 5. مدیریت ادمین‌ها (فقط مالک) -->
     <section id="sec-admins" class="page-sec owner-only">
-      <div class="sec-header"><h2>👥 مدیریت ادمین‌ها</h2></div>
+      <div class="sec-header"><h2>👥 مدیریت محلی ادمین‌ها</h2></div>
       <div class="panel-card">
-        <h3>➕ افزودن ادمین جدید</h3>
+        <div class="info-note">توجه امنیتی: نقش‌های مالک و ادمین در نسخه تک‌فایلی جهت مدیریت محلی مرورگر هستند و جایگزین احراز هویت سمت سرور نمی‌باشند.</div>
+        <h3>➕ ساخت ادمین جدید</h3>
         <form id="addAdminForm">
           <div class="form-grid">
-            <div class="field"><label>نام نمایشی</label><input type="text" id="aName" required placeholder="ادمین ۱"/></div>
-            <div class="field"><label>نام کاربری</label><input type="text" id="aUser" class="ltr" required/></div>
+            <div class="field"><label>نام نمایشی ادمین</label><input type="text" id="aName" required placeholder="مثال: ادمین فروش"/></div>
+            <div class="field"><label>نام کاربری ورود</label><input type="text" id="aUser" class="ltr" required/></div>
             <div class="field"><label>رمز عبور</label><input type="text" id="aPass" class="ltr" required/></div>
-            <div class="field"><label>اعتبار (روز)</label><input type="number" id="aDays" value="30" required/></div>
+            <div class="field"><label>مدت اعتبار (روز)</label><input type="number" id="aDays" min="1" max="3650" value="30" required/></div>
           </div>
-          <button type="submit" class="btn btn-navy" style="margin-top:10px">ثبت ادمین</button>
+          <button type="submit" class="btn btn-navy" style="margin-top:12px">➕ ثبت ادمین</button>
         </form>
       </div>
       <div class="panel-card">
-        <h3>📋 ادمین‌های ثبت‌شده</h3>
+        <h3>📋 لیست ادمین‌ها</h3>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>نام</th><th>نام کاربری</th><th>اعتبار</th><th>عملیات</th></tr></thead>
+            <thead>
+              <tr>
+                <th>نام ادمین</th>
+                <th>نام کاربری</th>
+                <th>تاریخ ایجاد</th>
+                <th>تاریخ انقضا</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
             <tbody id="adminsTbody"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- تنظیمات پنل -->
+    <!-- 6. تنظیمات پنل و سرورها (فقط مالک) -->
     <section id="sec-settings" class="page-sec owner-only">
-      <div class="sec-header"><h2>⚙️ تنظیمات اصلی</h2></div>
+      <div class="sec-header"><h2>⚙️ تنظیمات پنل و مدیریت سرورها</h2></div>
       <div class="panel-card">
+        <h3>🔐 تنظیمات عمومی و دسترسی مالک</h3>
         <form id="settingsForm">
           <div class="form-grid">
-            <div class="field"><label>آدرس پایه پنل (Base URL)</label><input type="text" id="setBaseUrl" class="ltr" required/></div>
-            <div class="field"><label>تغییر رمز عبور مالک</label><input type="password" id="setOwnerPass" class="ltr" placeholder="رمز جدید..."/></div>
+            <div class="field"><label>نام پنل</label><input type="text" id="setPanelName" required/></div>
+            <div class="field"><label>آدرس پایه پنل (Panel URL)</label><input type="text" id="setBaseUrl" class="ltr" required/></div>
+            <div class="field"><label>نام کاربری مالک</label><input type="text" id="setOwnerUser" class="ltr" required/></div>
+            <div class="field"><label>رمز عبور جدید مالک (خالی = بدون تغییر)</label><input type="password" id="setOwnerPass" class="ltr" placeholder="رمز عبور جدید..."/></div>
+            <div class="field"><label>تنظیمات DNS پیش‌فرض</label><input type="text" id="setDns" class="ltr" required/></div>
+            <div class="field"><label>تنظیمات MTU پیش‌فرض</label><input type="number" id="setMtu" class="ltr" min="1200" max="1500" required/></div>
           </div>
-          <button type="submit" class="btn btn-navy" style="margin-top:10px">ذخیره تنظیمات</button>
+          <button type="submit" class="btn btn-navy" style="margin-top:14px">💾 ذخیره تنظیمات</button>
         </form>
-        <div style="margin-top:16px">
-          <button type="button" class="btn btn-red" id="btnReset">⚠️ پاک کردن کل اطلاعات (Reset)</button>
+      </div>
+
+      <div class="panel-card">
+        <h3>🖥️ افزودن سرور جدید (کشورهای دیگر)</h3>
+        <form id="addServerForm">
+          <div class="form-grid">
+            <div class="field"><label>نام سرور / کشور</label><input type="text" id="sCountry" required placeholder="مثال: ترکیه - استانبول"/></div>
+            <div class="field"><label>Endpoint (IP:Port)</label><input type="text" id="sEndpoint" class="ltr" required placeholder="185.10.20.30:51820"/></div>
+            <div class="field"><label>PublicKey سرور</label><input type="text" id="sPubKey" class="ltr" required placeholder="کلید عمومی ۴۴ کاراکتری"/></div>
+            <div class="field"><label>آدرس شبکه کلاینت (Address)</label><input type="text" id="sAddress" class="ltr" required value="172.26.6.23/32"/></div>
+          </div>
+          <button type="submit" class="btn btn-sky" style="margin-top:12px">➕ ثبت سرور جدید</button>
+        </form>
+        <div id="serversListBox" style="margin-top:14px"></div>
+      </div>
+
+      <div class="panel-card">
+        <h3>💾 پشتیبان‌گیری و بازنشانی (Reset)</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button type="button" class="btn btn-green" id="btnBackup">⬇️ پشتیبان‌گیری (JSON)</button>
+          <label class="btn btn-sky" style="margin:0;cursor:pointer">⬆️ بازیابی اطلاعات<input type="file" id="inpRestore" accept=".json" style="display:none"/></label>
+          <button type="button" class="btn btn-red" id="btnResetAll">⚠️ پاک کردن کل داده‌ها (Reset)</button>
         </div>
       </div>
     </section>
@@ -357,12 +565,12 @@ td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
   </main>
 </div>
 
-<!-- مودال نمایش جزئیات و QR -->
+<!-- مودال جزئیات کانفیگ -->
 <div class="modal" id="infoModal">
   <div class="modal-box">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <h3 id="modalTitle" style="color:var(--navy);font-size:1rem">جزئیات کانفیگ</h3>
-      <button type="button" onclick="closeModal()" style="background:none;border:none;font-size:1.2rem">✕</button>
+    <div class="modal-head">
+      <h3 id="modalTitle" style="color:var(--navy);font-size:1.05rem">جزئیات کانفیگ</h3>
+      <button type="button" class="close-modal" onclick="closeModal()">✕</button>
     </div>
     <div id="modalBody"></div>
   </div>
@@ -372,33 +580,152 @@ td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
 
 <script>
 (function(){
-  const STORAGE_KEY = "ultra_wg_panel_v4_data";
-  const SESSION_KEY = "ultra_wg_panel_v4_sess";
+  const STORAGE_KEY = "wg_pro_panel_v1_db";
+  const SESSION_KEY = "wg_pro_panel_v1_sess";
 
-  const SERVER_CONFIG = {
-    publicKey: "f9evqsqa8cawDQNTjQkU7vta415caGpye3YSH8zX+Sw=",
-    endpoint: "212.108.97.58:59621",
-    dns: "1.1.1.1,8.8.8.8,95.85.95.85,2.56.220.2,94.140.14.14,149.112.112.112",
-    mtu: 1300
+  // پیاده‌سازی استاندارد X25519 Scalar Multiplication برای مشتق کردن دقیق PublicKey از PrivateKey
+  const X25519 = (function(){
+    const P = (1n << 255n) - 19n;
+    function mod(a) { const r = a % P; return r >= 0n ? r : r + P; }
+    function inv(a) {
+      let res = 1n, base = mod(a), exp = P - 2n;
+      while (exp > 0n) {
+        if (exp & 1n) res = mod(res * base);
+        base = mod(base * base);
+        exp >>= 1n;
+      }
+      return res;
+    }
+    function scalarMult(kBytes, uBytes) {
+      const k = new Uint8Array(kBytes);
+      k[0] &= 248; k[31] &= 127; k[31] |= 64;
+      let scalar = 0n;
+      for (let i = 0; i < 32; i++) scalar |= BigInt(k[i]) << (8n * BigInt(i));
+      let u = 0n;
+      for (let i = 0; i < 32; i++) u |= BigInt(uBytes[i]) << (8n * BigInt(i));
+      u &= (1n << 255n) - 1n;
+
+      let x1 = u, x2 = 1n, z2 = 0n, x3 = u, z3 = 1n, swap = 0n;
+      for (let t = 254n; t >= 0n; t--) {
+        const kt = (scalar >> t) & 1n;
+        swap ^= kt;
+        if (swap) { [x2, x3] = [x3, x2]; [z2, z3] = [z3, z2]; }
+        swap = kt;
+        const A = mod(x2 + z2), AA = mod(A * A);
+        const B = mod(x2 - z2), BB = mod(B * B);
+        const E = mod(AA - BB);
+        const C = mod(x3 + z3), D = mod(x3 - z3);
+        const DA = mod(D * A), CB = mod(C * B);
+        x3 = mod((DA + CB) * (DA + CB));
+        z3 = mod(x1 * mod((DA - CB) * (DA - CB)));
+        x2 = mod(AA * BB);
+        z2 = mod(E * mod(AA + mod(121665n * E)));
+      }
+      if (swap) { [x2, x3] = [x3, x2]; [z2, z3] = [z3, z2]; }
+      const res = mod(x2 * inv(z2));
+      const out = new Uint8Array(32);
+      for (let i = 0; i < 32; i++) out[i] = Number((res >> (8n * BigInt(i))) & 0xffn);
+      return out;
+    }
+    return {
+      generateKeyPair() {
+        const priv = new Uint8Array(32);
+        crypto.getRandomValues(priv);
+        priv[0] &= 248; priv[31] &= 127; priv[31] |= 64;
+        const basePoint = new Uint8Array(32);
+        basePoint[0] = 9;
+        const pub = scalarMult(priv, basePoint);
+        const toB64 = arr => btoa(String.fromCharCode.apply(null, arr));
+        return { privateKey: toB64(priv), publicKey: toB64(pub) };
+      }
+    };
+  })();
+
+  // رمزنگاری و رمزگشایی واقعی AES-GCM با Web Crypto API برای لینک اشتراک
+  const SubCrypto = {
+    async deriveKey(password, salt) {
+      const enc = new TextEncoder();
+      const keyMaterial = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveKey"]);
+      return crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt: salt, iterations: 100000, hash: "SHA-256" },
+        keyMaterial,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["encrypt", "decrypt"]
+      );
+    },
+    toBase64Url(bytes) {
+      let bin = "";
+      bytes.forEach(b => bin += String.fromCharCode(b));
+      return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    },
+    fromBase64Url(str) {
+      str = str.replace(/-/g, "+").replace(/_/g, "/");
+      while (str.length % 4) str += "=";
+      const bin = atob(str);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      return bytes;
+    },
+    async encryptPayload(dataObj, password) {
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const key = await this.deriveKey(password, salt);
+      const encoded = new TextEncoder().encode(JSON.stringify(dataObj));
+      const cipher = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, encoded));
+      const combined = new Uint8Array(salt.length + iv.length + cipher.length);
+      combined.set(salt, 0);
+      combined.set(iv, 16);
+      combined.set(cipher, 28);
+      return this.toBase64Url(combined);
+    },
+    async decryptPayload(b64Url, password) {
+      const combined = this.fromBase64Url(b64Url);
+      if (combined.length < 29) throw new Error("Invalid payload");
+      const salt = combined.slice(0, 16);
+      const iv = combined.slice(16, 28);
+      const cipher = combined.slice(28);
+      const key = await this.deriveKey(password, salt);
+      const plainBuf = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, cipher);
+      return JSON.parse(new TextDecoder().decode(plainBuf));
+    }
   };
+
+  // اطلاعات واقعی سرور اصلی ارسال‌شده توسط کاربر
+  const DEFAULT_SERVER = {
+    id: "srv_main_germany",
+    country: "آلمان (سرور اصلی)",
+    endpoint: "212.108.97.58:59621",
+    publicKey: "f9evqsqa8cawDQNTjQkU7vta415caGpye3YSH8zX+Sw=",
+    address: "172.26.6.23/32",
+    configured: true
+  };
+
+  const UNCONFIGURED_COUNTRIES = ["ایران", "ترکیه", "هلند", "فرانسه", "امارات", "فنلاند", "انگلیس"];
 
   let DB = {
     settings: {
+      panelName: "WireGuard Professional Panel",
+      baseUrl: window.location.origin + window.location.pathname,
       ownerUser: "admin",
       ownerPass: "admin",
-      baseUrl: window.location.origin + window.location.pathname
+      dns: "1.1.1.1, 8.8.8.8, 95.85.95.85, 2.56.220.2, 94.140.14.14, 149.112.112.112",
+      mtu: 1300
     },
+    servers: [DEFAULT_SERVER],
     admins: [],
     configs: []
   };
 
   let CURRENT_USER = null;
+  let ACTIVE_SUB_DATA = null;
 
   function toast(msg) {
     const t = document.getElementById("toast");
+    if (!t) return;
     t.textContent = msg;
     t.classList.add("show");
-    setTimeout(() => t.classList.remove("show"), 3000);
+    setTimeout(() => t.classList.remove("show"), 3200);
   }
 
   function saveDB() {
@@ -408,100 +735,137 @@ td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
   function initDB() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
-      try { DB = JSON.parse(raw); } catch(e){}
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed.settings && Array.isArray(parsed.servers)) DB = parsed;
+      } catch (e) {}
     }
   }
 
-  function checkPublicSubRoute() {
-    const params = new URLSearchParams(window.location.search);
-    const subData = params.get("sub");
-    if (!subData) return false;
-
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("appLayout").style.display = "none";
-    document.getElementById("publicSubView").style.display = "flex";
-
-    try {
-      const jsonStr = decodeURIComponent(atob(subData));
-      const cfg = JSON.parse(jsonStr);
-
-      const remGB = Math.max(0, cfg.volumeGB - cfg.usedGB);
-      const remDays = Math.ceil((new Date(cfg.expiresAt).getTime() - Date.now()) / 86400000);
-
-      document.getElementById("pubTitle").textContent = "اشتراک کاربر: " + cfg.userName;
-      document.getElementById("pubDetails").innerHTML = `
-        <div class="pub-row"><span>کشور سرور</span><span>${cfg.country}</span></div>
-        <div class="pub-row"><span>IP اختصاصی</span><span class="ltr">172.26.6.${cfg.ipNum}</span></div>
-        <div class="pub-row"><span>حجم کل / مصرف</span><span>${cfg.volumeGB} GB / ${cfg.usedGB} GB</span></div>
-        <div class="pub-row"><span>حجم باقی‌مانده</span><span style="color:var(--sky)">${remGB} GB</span></div>
-        <div class="pub-row"><span>روزهای باقی‌مانده</span><span>${remDays > 0 ? remDays + ' روز' : 'منقضی شده'}</span></div>
-      `;
-
-      const confText = buildConfStr(cfg);
-      document.getElementById("pubConfText").textContent = confText;
-
-      const qrEl = document.getElementById("pubQr");
-      qrEl.innerHTML = "";
-      new QRCode(qrEl, { text: confText, width: 180, height: 180 });
-
-      document.getElementById("pubBtnDl").onclick = () => downloadConfFile(confText, cfg.userName);
-      document.getElementById("pubBtnCopy").onclick = () => { navigator.clipboard.writeText(confText); toast("✅ کپی شد"); };
-    } catch(e) {
-      document.getElementById("pubTitle").textContent = "خطا در بارگذاری اشتراک";
-      document.getElementById("pubDetails").innerHTML = "<p style='color:var(--red);text-align:center'>لینک ساب نامعتبر یا خراب است.</p>";
-      document.getElementById("pubConfText").style.display = "none";
-      document.getElementById("pubBtnDl").style.display = "none";
-      document.getElementById("pubBtnCopy").style.display = "none";
-    }
-    return true;
+  function esc(s) {
+    return String(s || "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   }
 
-  function generateWgKeys() {
-    const priv = new Uint8Array(32);
-    crypto.getRandomValues(priv);
-    priv[0] &= 248; priv[31] &= 127; priv[31] |= 64;
-    const pub = new Uint8Array(32);
-    crypto.getRandomValues(pub);
-    const toB64 = arr => btoa(String.fromCharCode.apply(null, arr));
-    return { privateKey: toB64(priv), publicKey: toB64(pub) };
+  function getRemDays(expIso) {
+    const d = Math.ceil((new Date(expIso).getTime() - Date.now()) / 86400000);
+    return d > 0 ? d : 0;
   }
 
-  function buildConfStr(c) {
+  function buildWireGuardConf(cfg) {
+    const srv = DB.servers.find(s => s.id === cfg.serverId) || DB.servers[0];
     return [
       `[Interface]`,
-      `PrivateKey = ${c.privateKey}`,
-      `Address = 172.26.6.${c.ipNum}/32`,
-      `MTU = ${SERVER_CONFIG.mtu}`,
-      `DNS = ${SERVER_CONFIG.dns}`,
+      `PrivateKey = ${cfg.clientPrivateKey}`,
+      `Address = ${srv.address}`,
+      `DNS = ${DB.settings.dns}`,
+      `MTU = ${DB.settings.mtu}`,
       ``,
       `[Peer]`,
-      `PublicKey = ${SERVER_CONFIG.publicKey}`,
-      `AllowedIPs = 0.0.0.0/0,::/0`,
-      `Endpoint = ${SERVER_CONFIG.endpoint}`,
+      `PublicKey = ${srv.publicKey}`,
+      `AllowedIPs = 0.0.0.0/0, ::/0`,
+      `Endpoint = ${srv.endpoint}`,
       `PersistentKeepalive = 20`
-    ].join("\n");
+    ].join("
+");
   }
 
-  function downloadConfFile(text, userName) {
-    const safeName = String(userName || "config").replace(/[^a-zA-Z0-9_\u0600-\u06FF-]/g, "_");
-    const fullName = safeName.endsWith(".conf") ? safeName : safeName + ".conf";
-    const blob = new Blob([text], { type: "application/x-wg-config" });
+  // دانلود فایل واقعی .conf بدون هیچ‌گونه پسوند .txt
+  function downloadConfFile(confContent, fileNameBase) {
+    const clean = String(fileNameBase || "WireGuard_Config").replace(/[^a-zA-Z0-9_؀-ۿ-]/g, "_");
+    const fileName = clean.endsWith(".conf") ? clean : clean + ".conf";
+    const blob = new Blob([confContent], { type: "application/x-wg-config" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = fullName;
+    a.download = fileName;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
-  function getSubLink(c) {
-    const payload = btoa(encodeURIComponent(JSON.stringify(c)));
-    const base = DB.settings.baseUrl.split("?")[0];
-    return `${base}?sub=${payload}`;
+  // بررسی باز شدن لینک ساب در قسمت Hash (#sub=...) مستقل از مرورگر سازنده
+  function checkPublicSubscriptionHash() {
+    const hash = window.location.hash || "";
+    if (!hash.startsWith("#sub=")) return false;
+
+    const encryptedStr = hash.slice(5).trim();
+    if (!encryptedStr) return false;
+
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("appLayout").style.display = "none";
+    document.getElementById("publicSubView").style.display = "flex";
+
+    const unlockBtn = document.getElementById("btnUnlockSub");
+    const passInput = document.getElementById("pubPassInput");
+    const errBox = document.getElementById("pubPassErr");
+
+    unlockBtn.onclick = async () => {
+      const pass = passInput.value;
+      if (!pass) {
+        errBox.textContent = "لطفاً رمز اشتراک را وارد کنید.";
+        errBox.style.display = "block";
+        return;
+      }
+      try {
+        const data = await SubCrypto.decryptPayload(encryptedStr, pass);
+        errBox.style.display = "none";
+        if (data.disabled) {
+          errBox.textContent = "این لینک اشتراک توسط مدیر غیرفعال شده است.";
+          errBox.style.display = "block";
+          return;
+        }
+        ACTIVE_SUB_DATA = data;
+        document.getElementById("pubUnlockBox").style.display = "none";
+        document.getElementById("pubUnlockedContent").style.display = "block";
+
+        const remDays = getRemDays(data.expiresAt);
+        const isValid = remDays > 0;
+        document.getElementById("pubTitle").textContent = `اشتراک: ${data.configName}`;
+        document.getElementById("pubDetails").innerHTML = `
+          <div class="pub-row"><span>نام کاربر</span><span>${esc(data.userName)}</span></div>
+          <div class="pub-row"><span>نام کانفیگ</span><span>${esc(data.configName)}</span></div>
+          <div class="pub-row"><span>نوع سرویس</span><span>${esc(data.usageType)}</span></div>
+          <div class="pub-row"><span>آدرس IP شبکه</span><span class="ltr">${esc(data.address)}</span></div>
+          <div class="pub-row"><span>حجم کل ثبت‌شده</span><span>${data.volumeGB} GB</span></div>
+          <div class="pub-row"><span>وضعیت حجم باقی‌مانده</span><span>نیازمند اتصال به سرور مانیتورینگ</span></div>
+          <div class="pub-row"><span>روزهای باقی‌مانده</span><span>${remDays} روز</span></div>
+          <div class="pub-row"><span>وضعیت اشتراک</span><span>${isValid ? '<span class="badge b-green">معتبر</span>' : '<span class="badge b-red">منقضی شده</span>'}</span></div>
+        `;
+
+        const confText = [
+          `[Interface]`,
+          `PrivateKey = ${data.clientPrivateKey}`,
+          `Address = ${data.address}`,
+          `DNS = ${data.dns}`,
+          `MTU = ${data.mtu}`,
+          ``,
+          `[Peer]`,
+          `PublicKey = ${data.serverPublicKey}`,
+          `AllowedIPs = 0.0.0.0/0, ::/0`,
+          `Endpoint = ${data.endpoint}`,
+          `PersistentKeepalive = 20`
+        ].join("
+");
+
+        document.getElementById("pubConfText").textContent = confText;
+        const qrBox = document.getElementById("pubQr");
+        qrBox.innerHTML = "";
+        new QRCode(qrBox, { text: confText, width: 190, height: 190 });
+
+        document.getElementById("pubBtnDl").onclick = () => downloadConfFile(confText, data.configName);
+        document.getElementById("pubBtnCopy").onclick = () => {
+          navigator.clipboard.writeText(confText).then(() => toast("✅ متن کانفیگ کپی شد"));
+        };
+      } catch (e) {
+        errBox.textContent = "رمز اشتراک اشتباه است یا داده‌های لینک خراب شده‌اند.";
+        errBox.style.display = "block";
+      }
+    };
+    return true;
   }
 
+  // ورود به پنل
   document.getElementById("loginForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const u = document.getElementById("loginUser").value.trim();
@@ -509,234 +873,589 @@ td{padding:10px;border-bottom:1px solid var(--border);vertical-align:middle}
     const errBox = document.getElementById("loginErr");
 
     if (u === DB.settings.ownerUser && p === DB.settings.ownerPass) {
-      CURRENT_USER = { role: "owner", name: "مالک (Admin)" };
+      CURRENT_USER = { role: "owner", id: "owner", username: u, name: "مالک پنل" };
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(CURRENT_USER));
-      enterApp();
+      errBox.style.display = "none";
+      enterPanel();
       return;
     }
 
     const adm = DB.admins.find(a => a.username === u && a.pass === p);
     if (adm) {
-      CURRENT_USER = { role: "admin", id: adm.id, name: adm.name };
+      if (!adm.active || getRemDays(adm.expiresAt) <= 0) {
+        errBox.textContent = "دسترسی این ادمین مسدود یا منقضی شده است.";
+        errBox.style.display = "block";
+        return;
+      }
+      CURRENT_USER = { role: "admin", id: adm.id, username: adm.username, name: adm.name };
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(CURRENT_USER));
-      enterApp();
+      errBox.style.display = "none";
+      enterPanel();
       return;
     }
 
+    errBox.textContent = "نام کاربری یا رمز عبور اشتباه است.";
     errBox.style.display = "block";
   });
 
-  function enterApp() {
+  function enterPanel() {
     document.getElementById("loginScreen").style.display = "none";
     document.getElementById("appLayout").style.display = "block";
+    document.getElementById("topBrandTitle").textContent = DB.settings.panelName;
     document.getElementById("currentUserName").textContent = CURRENT_USER.name;
+    document.getElementById("currentUserRole").textContent = CURRENT_USER.role === "owner" ? "مالک" : "ادمین";
+
     document.querySelectorAll(".owner-only").forEach(el => {
       el.style.display = CURRENT_USER.role === "owner" ? "" : "none";
     });
+
+    const alertEl = document.getElementById("defaultPassAlert");
+    if (CURRENT_USER.role === "owner" && DB.settings.ownerPass === "admin") {
+      alertEl.style.display = "flex";
+    } else {
+      alertEl.style.display = "none";
+    }
     renderAll();
   }
 
   document.getElementById("btnLogout").addEventListener("click", () => {
     sessionStorage.removeItem(SESSION_KEY);
+    CURRENT_USER = null;
     location.reload();
   });
 
+  // منوی همبرگری و سایدبار
   const sidebar = document.getElementById("sidebar");
   const backdrop = document.getElementById("sideBackdrop");
+  const mainContent = document.getElementById("mainContent");
+
   document.getElementById("btnToggleMenu").addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    backdrop.classList.toggle("open");
+    if (window.innerWidth <= 992) {
+      sidebar.classList.toggle("open");
+      backdrop.classList.toggle("open");
+    } else {
+      sidebar.classList.toggle("collapsed");
+      mainContent.classList.toggle("expanded");
+    }
   });
-  backdrop.addEventListener("click", () => {
+  function closeSide() {
     sidebar.classList.remove("open");
     backdrop.classList.remove("open");
-  });
+  }
+  document.getElementById("btnCloseSide").addEventListener("click", closeSide);
+  backdrop.addEventListener("click", closeSide);
 
   window.navTo = function(secId) {
     document.querySelectorAll(".side-btn").forEach(b => b.classList.toggle("active", b.dataset.sec === secId));
     document.querySelectorAll(".page-sec").forEach(s => s.classList.toggle("active", s.id === "sec-" + secId));
-    sidebar.classList.remove("open");
-    backdrop.classList.remove("open");
+    closeSide();
     renderAll();
   };
-  document.querySelectorAll(".side-btn").forEach(btn => {
-    btn.addEventListener("click", () => navTo(btn.dataset.sec));
-  });
+  document.querySelectorAll(".side-btn").forEach(b => b.addEventListener("click", () => navTo(b.dataset.sec)));
 
+  function getVisibleConfigs() {
+    if (CURRENT_USER.role === "owner") return DB.configs;
+    return DB.configs.filter(c => c.creatorId === CURRENT_USER.id);
+  }
+
+  // ساخت لینک ساب رمزنگاری‌شده AES-GCM
+  async function generateEncryptedSubUrl(cfg) {
+    const srv = DB.servers.find(s => s.id === cfg.serverId) || DB.servers[0];
+    const payload = {
+      userName: cfg.userName,
+      configName: cfg.configName,
+      usageType: cfg.usageType,
+      volumeGB: cfg.volumeGB,
+      expiresAt: cfg.expiresAt,
+      address: srv.address,
+      dns: DB.settings.dns,
+      mtu: DB.settings.mtu,
+      serverPublicKey: srv.publicKey,
+      endpoint: srv.endpoint,
+      clientPrivateKey: cfg.clientPrivateKey,
+      disabled: !cfg.subActive
+    };
+    const cipherHash = await SubCrypto.encryptPayload(payload, cfg.subPassword);
+    const cleanBase = DB.settings.baseUrl.split("#")[0].split("?")[0];
+    return `${cleanBase}#sub=${cipherHash}`;
+  }
+
+  // ساخت کانفیگ جدید
   let isCreating = false;
-  document.getElementById("createCfgForm").addEventListener("submit", (e) => {
+  document.getElementById("createCfgForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     if (isCreating) return;
 
     const userName = document.getElementById("cUser").value.trim();
-    const country = document.getElementById("cCountry").value;
+    const configName = document.getElementById("cTitle").value.trim();
+    const usageType = document.getElementById("cUsageType").value;
+    const serverId = document.getElementById("cServer").value;
     const volumeGB = parseInt(document.getElementById("cVolume").value, 10);
     const days = parseInt(document.getElementById("cDays").value, 10);
+    const usersCount = parseInt(document.getElementById("cUsersCount").value, 10) || 1;
+    const subPassword = document.getElementById("cSubPass").value.trim();
+
+    if (!serverId) {
+      toast("❌ لطفاً یک سرور پیکربندی‌شده انتخاب کنید.");
+      return;
+    }
 
     isCreating = true;
     const btn = document.getElementById("btnSubmitCfg");
     btn.disabled = true;
-    btn.textContent = "در حال ساخت...";
+    btn.textContent = "در حال تولید کلید و رمزنگاری...";
 
     try {
-      const keys = generateWgKeys();
-      const ipNum = Math.floor(2 + Math.random() * 250);
+      const keys = X25519.generateKeyPair();
       const now = new Date();
       const exp = new Date(now.getTime() + days * 86400000);
+      const uniqueId = "cfg_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 6);
 
       const newCfg = {
-        id: "cfg_" + Math.random().toString(36).substring(2, 8),
+        id: uniqueId,
         userName,
-        country,
+        configName,
+        usageType,
+        serverId,
         volumeGB,
-        usedGB: 0,
         days,
-        ipNum,
-        privateKey: keys.privateKey,
+        usersCount,
+        clientPrivateKey: keys.privateKey,
+        clientPublicKey: keys.publicKey,
+        subPassword,
+        subActive: true,
+        creatorId: CURRENT_USER.id,
+        creatorName: CURRENT_USER.name,
         createdAt: now.toISOString(),
         expiresAt: exp.toISOString()
       };
 
+      newCfg.subUrl = await generateEncryptedSubUrl(newCfg);
       DB.configs.unshift(newCfg);
       saveDB();
 
-      const confText = buildConfStr(newCfg);
-      downloadConfFile(confText, userName);
-
       document.getElementById("createCfgForm").reset();
-      toast("✅ کانفیگ ساخته و فایل .conf دانلود شد");
-      navTo("configs");
+      toast("✅ فایل کانفیگ و لینک اشتراک آماده شد");
+      renderAll();
+      showConfigDetailModal(newCfg.id);
     } finally {
-      setTimeout(() => {
-        isCreating = false;
-        btn.disabled = false;
-        btn.textContent = "✨ ساخت و دانلود کانفیگ";
-      }, 500);
+      isCreating = false;
+      btn.disabled = false;
+      btn.textContent = "✨ تولید کانفیگ و نمایش جزئیات";
     }
   });
 
-  function renderConfigs() {
-    const tbody = document.getElementById("configsTbody");
-    if (!DB.configs.length) {
-      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:16px">کانفیگی ثبت نشده است</td></tr>`;
-      return;
-    }
-
-    tbody.innerHTML = DB.configs.map(c => {
-      const subUrl = getSubLink(c);
-      return `
-        <tr>
-          <td><strong>${c.userName}</strong></td>
-          <td>${c.country}</td>
-          <td class="ltr">172.26.6.${c.ipNum}</td>
-          <td>${c.volumeGB} GB</td>
-          <td>
-            <button type="button" class="btn btn-navy btn-sm" onclick="showDetails('${c.id}')">👁️ جزئیات / QR</button>
-            <button type="button" class="btn btn-sky btn-sm" onclick="navigator.clipboard.writeText('${subUrl}');toast('✅ لینک ساب کپی شد')">🔗 ساب</button>
-            <button type="button" class="btn btn-red btn-sm" onclick="delConfig('${c.id}')">🗑️</button>
-          </td>
-        </tr>
-      `;
-    }).join("");
-  }
-
-  window.showDetails = function(id) {
+  // مودال جزئیات کانفیگ
+  window.showConfigDetailModal = function(id) {
     const c = DB.configs.find(x => x.id === id);
     if (!c) return;
-    const confStr = buildConfStr(c);
-    const subUrl = getSubLink(c);
+    const srv = DB.servers.find(s => s.id === c.serverId) || DB.servers[0];
+    const confStr = buildWireGuardConf(c);
+    const remDays = getRemDays(c.expiresAt);
 
-    document.getElementById("modalTitle").textContent = "جزئیات کانفیگ: " + c.userName;
+    document.getElementById("modalTitle").textContent = `جزئیات کانفیگ: ${c.configName}`;
     document.getElementById("modalBody").innerHTML = `
-      <div style="font-size:0.85rem;margin-bottom:8px">لینک اشتراک (ساب):</div>
-      <input type="text" class="ltr" readonly value="${subUrl}" style="width:100%;padding:8px;font-size:0.75rem;margin-bottom:10px"/>
-      <div id="qrBox"></div>
-      <pre class="conf-pre">${confStr}</pre>
-      <button type="button" class="btn btn-navy" style="width:100%;margin-top:8px" onclick="downloadConfFile(\`${confStr}\`, '${c.userName}')">⬇️ دانلود فایل .conf</button>
+      <div class="info-note">وضعیت اتصال: <strong>آماده‌سازی فایل</strong> (جهت اتصال واقعی، کلید عمومی کلاینت زیر را در سرور ثبت کنید)</div>
+      <div class="pub-row"><span>نام کاربر</span><span>${esc(c.userName)}</span></div>
+      <div class="pub-row"><span>نام کانفیگ</span><span>${esc(c.configName)}</span></div>
+      <div class="pub-row"><span>نوع استفاده</span><span>${esc(c.usageType)}</span></div>
+      <div class="pub-row"><span>آدرس IP شبکه</span><span class="ltr">${esc(srv.address)}</span></div>
+      <div class="pub-row"><span>Endpoint سرور</span><span class="ltr">${esc(srv.endpoint)}</span></div>
+      <div class="pub-row"><span>حجم ثبت‌شده / اعتبار</span><span>${c.volumeGB} GB / ${remDays} روز</span></div>
+      <div class="field" style="margin-top:10px">
+        <label>PublicKey کلاینت (جهت ثبت در wg0.conf سرور):</label>
+        <input type="text" class="ltr" readonly value="${esc(c.clientPublicKey)}"/>
+      </div>
+      <div class="field" style="margin-top:10px">
+        <label>لینک اشتراک رمزنگاری‌شده (رمز: ${esc(c.subPassword)}):</label>
+        <input type="text" class="ltr" readonly value="${esc(c.subUrl)}"/>
+      </div>
+      <div id="qrBox" style="display:none"></div>
+      <pre class="conf-pre">${esc(confStr)}</pre>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+        <button type="button" class="btn btn-navy" id="mBtnDl">⬇️ دانلود فایل .conf</button>
+        <button type="button" class="btn btn-sky" id="mBtnCopy">📋 کپی کانفیگ</button>
+        <button type="button" class="btn btn-purple" id="mBtnQr">📱 نمایش QR Code</button>
+        <button type="button" class="btn btn-green" id="mBtnSub">🔗 کپی لینک اشتراک</button>
+        <button type="button" class="btn btn-outline" onclick="closeModal()">بستن پنجره</button>
+      </div>
     `;
     document.getElementById("infoModal").classList.add("open");
-    new QRCode(document.getElementById("qrBox"), { text: confStr, width: 200, height: 200 });
+
+    document.getElementById("mBtnDl").onclick = () => downloadConfFile(confStr, c.configName);
+    document.getElementById("mBtnCopy").onclick = () => {
+      navigator.clipboard.writeText(confStr).then(() => toast("✅ متن کانفیگ کپی شد"));
+    };
+    document.getElementById("mBtnQr").onclick = () => {
+      const box = document.getElementById("qrBox");
+      box.style.display = "flex";
+      box.innerHTML = "";
+      new QRCode(box, { text: confStr, width: 200, height: 200 });
+    };
+    document.getElementById("mBtnSub").onclick = () => {
+      navigator.clipboard.writeText(c.subUrl).then(() => toast("✅ لینک اشتراک کپی شد"));
+    };
   };
 
   window.closeModal = function() {
     document.getElementById("infoModal").classList.remove("open");
   };
 
-  window.delConfig = function(id) {
-    if (confirm("حذف این کانفیگ؟")) {
-      DB.configs = DB.configs.filter(x => x.id !== id);
-      saveDB(); renderConfigs(); toast("🗑️ حذف شد");
+  // رندر داشبورد
+  function renderDashboard() {
+    const visible = getVisibleConfigs();
+    const activeCount = visible.filter(c => getRemDays(c.expiresAt) > 0).length;
+    const expCount = visible.length - activeCount;
+    const totalVol = visible.reduce((s, c) => s + c.volumeGB, 0);
+    const mainSrv = DB.servers[0];
+
+    document.getElementById("dashStats").innerHTML = `
+      <div class="stat-card"><div class="stat-icon ic-navy">📦</div><div class="stat-info"><span>تعداد کل کانفیگ‌ها</span><strong>${visible.length}</strong></div></div>
+      <div class="stat-card"><div class="stat-icon ic-green">🟢</div><div class="stat-info"><span>کانفیگ‌های فعال</span><strong>${activeCount}</strong></div></div>
+      <div class="stat-card"><div class="stat-icon ic-red">🔴</div><div class="stat-info"><span>کانفیگ‌های منقضی</span><strong>${expCount}</strong></div></div>
+      ${CURRENT_USER.role === "owner" ? `<div class="stat-card"><div class="stat-icon ic-purple">👥</div><div class="stat-info"><span>تعداد ادمین‌ها</span><strong>${DB.admins.length}</strong></div></div>` : ""}
+      <div class="stat-card"><div class="stat-icon ic-sky">💾</div><div class="stat-info"><span>حجم ثبت‌شده</span><strong>${totalVol} GB</strong></div></div>
+      <div class="stat-card"><div class="stat-icon ic-navy">🖥️</div><div class="stat-info"><span>سرور انتخاب‌شده</span><strong style="font-size:0.9rem">${esc(mainSrv.country)}</strong></div></div>
+    `;
+
+    document.getElementById("dashServerSummary").innerHTML = `
+      <div class="pub-row"><span>سرور اصلی فعال</span><span>${esc(mainSrv.country)}</span></div>
+      <div class="pub-row"><span>Endpoint واقعی سرور</span><span class="ltr">${esc(mainSrv.endpoint)}</span></div>
+      <div class="pub-row"><span>وضعیت پروفایل‌های وب‌گردی و گیم</span><span class="badge b-green">آماده استفاده روی سرور اصلی</span></div>
+      <div class="pub-row"><span>کشورهای بدون سرور اختصاصی</span><span>${UNCONFIGURED_COUNTRIES.join("، ")} <span class="badge b-amber">نیازمند تنظیم سرور</span></span></div>
+    `;
+  }
+
+  // رندر پروفایل‌های مستقیم وب‌گردی و گیم
+  function renderProfilesSection() {
+    const srv = DB.servers[0];
+    const browseKeys = X25519.generateKeyPair();
+    const gameKeys = X25519.generateKeyPair();
+
+    const browseConf = [
+      `[Interface]`,
+      `PrivateKey = ${browseKeys.privateKey}`,
+      `Address = ${srv.address}`,
+      `DNS = ${DB.settings.dns}`,
+      `MTU = ${DB.settings.mtu}`,
+      ``,
+      `[Peer]`,
+      `PublicKey = ${srv.publicKey}`,
+      `AllowedIPs = 0.0.0.0/0, ::/0`,
+      `Endpoint = ${srv.endpoint}`,
+      `PersistentKeepalive = 20`
+    ].join("
+");
+
+    const gameConf = [
+      `[Interface]`,
+      `PrivateKey = ${gameKeys.privateKey}`,
+      `Address = ${srv.address}`,
+      `DNS = ${DB.settings.dns}`,
+      `MTU = ${DB.settings.mtu}`,
+      ``,
+      `[Peer]`,
+      `PublicKey = ${srv.publicKey}`,
+      `AllowedIPs = 0.0.0.0/0, ::/0`,
+      `Endpoint = ${srv.endpoint}`,
+      `PersistentKeepalive = 20`
+    ].join("
+");
+
+    document.getElementById("browseProfileInfo").innerHTML = `
+      <div class="pub-row"><span>سرور متصل</span><span>${esc(srv.country)}</span></div>
+      <div class="pub-row"><span>DNS تنظیم‌شده</span><span class="ltr" style="font-size:0.75rem">${esc(DB.settings.dns)}</span></div>
+      <div class="pub-row"><span>MTU</span><span class="ltr">${DB.settings.mtu}</span></div>
+    `;
+    const bQr = document.getElementById("browseQr");
+    bQr.innerHTML = "";
+    new QRCode(bQr, { text: browseConf, width: 170, height: 170 });
+    document.getElementById("btnDlBrowse").onclick = () => downloadConfFile(browseConf, "Web_Browsing_Profile");
+    document.getElementById("btnCopyBrowse").onclick = () => navigator.clipboard.writeText(browseConf).then(() => toast("✅ پروفایل وب‌گردی کپی شد"));
+
+    document.getElementById("gameProfileInfo").innerHTML = `
+      <div class="pub-row"><span>Endpoint اتصال</span><span class="ltr">${esc(srv.endpoint)}</span></div>
+      <div class="pub-row"><span>PersistentKeepalive</span><span class="ltr">20s</span></div>
+      <div class="pub-row"><span>MTU</span><span class="ltr">${DB.settings.mtu}</span></div>
+    `;
+    const gQr = document.getElementById("gameQr");
+    gQr.innerHTML = "";
+    new QRCode(gQr, { text: gameConf, width: 170, height: 170 });
+    document.getElementById("btnDlGame").onclick = () => downloadConfFile(gameConf, "Gaming_Profile");
+    document.getElementById("btnCopyGame").onclick = () => navigator.clipboard.writeText(gameConf).then(() => toast("✅ پروفایل گیم کپی شد"));
+  }
+
+  // رندر جدول کانفیگ‌ها و مدیریت ساب
+  function renderConfigsTable() {
+    const list = getVisibleConfigs();
+    const tbody = document.getElementById("configsTbody");
+    if (!list.length) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:18px">هنوز کانفیگی ساخته نشده است.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = list.map(c => {
+      const srv = DB.servers.find(s => s.id === c.serverId) || DB.servers[0];
+      const rem = getRemDays(c.expiresAt);
+      return `
+        <tr>
+          <td data-label="کاربر / کانفیگ"><strong>${esc(c.userName)}</strong><br><small style="color:var(--muted)">${esc(c.configName)}</small></td>
+          <td data-label="نوع سرویس"><span class="badge b-sky">${esc(c.usageType)}</span></td>
+          <td data-label="سرور / IP">${esc(srv.country)}<br><small class="ltr">${esc(srv.address)}</small></td>
+          <td data-label="حجم / اعتبار">${c.volumeGB} GB / ${rem} روز</td>
+          <td data-label="لینک ساب">${c.subActive ? '<span class="badge b-green">فعال</span>' : '<span class="badge b-red">غیرفعال</span>'}</td>
+          <td data-label="عملیات">
+            <div class="act-btns">
+              <button type="button" class="btn btn-navy btn-sm" onclick="showConfigDetailModal('${c.id}')">👁️ جزئیات</button>
+              <button type="button" class="btn btn-sky btn-sm" onclick="copySubUrl('${c.id}')">🔗 کپی ساب</button>
+              <a href="${esc(c.subUrl)}" target="_blank" class="btn btn-outline btn-sm" style="text-decoration:none">🌐 باز کردن ساب</a>
+              <button type="button" class="btn btn-amber btn-sm" onclick="changeSubPass('${c.id}')">🔑 تغییر رمز ساب</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="toggleSubStatus('${c.id}')">${c.subActive ? '⏸ قطع ساب' : '▶️ وصل ساب'}</button>
+              <button type="button" class="btn btn-red btn-sm" onclick="deleteConfig('${c.id}')">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  window.copySubUrl = function(id) {
+    const c = DB.configs.find(x => x.id === id);
+    if (!c) return;
+    navigator.clipboard.writeText(c.subUrl).then(() => toast("✅ لینک اشتراک کپی شد"));
+  };
+
+  window.changeSubPass = async function(id) {
+    const c = DB.configs.find(x => x.id === id);
+    if (!c) return;
+    const np = prompt("رمز جدید برای لینک اشتراک وارد کنید:", c.subPassword);
+    if (np && np.trim()) {
+      c.subPassword = np.trim();
+      c.subUrl = await generateEncryptedSubUrl(c);
+      saveDB();
+      renderConfigsTable();
+      toast("✅ رمز اشتراک تغییر کرد و لینک جدید ساخته شد");
     }
   };
 
+  window.toggleSubStatus = async function(id) {
+    const c = DB.configs.find(x => x.id === id);
+    if (!c) return;
+    c.subActive = !c.subActive;
+    c.subUrl = await generateEncryptedSubUrl(c);
+    saveDB();
+    renderConfigsTable();
+    toast(c.subActive ? "✅ لینک اشتراک فعال شد" : "⏸ لینک اشتراک غیرفعال شد");
+  };
+
+  window.deleteConfig = function(id) {
+    if (confirm("آیا این کانفیگ و لینک اشتراک آن حذف شوند؟")) {
+      DB.configs = DB.configs.filter(x => x.id !== id);
+      saveDB();
+      renderAll();
+      toast("🗑️ کانفیگ حذف شد");
+    }
+  };
+
+  // مدیریت ادمین‌ها
   document.getElementById("addAdminForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    const name = document.getElementById("aName").value.trim();
+    const username = document.getElementById("aUser").value.trim();
+    const pass = document.getElementById("aPass").value;
+    const days = parseInt(document.getElementById("aDays").value, 10) || 30;
+
+    if (username === DB.settings.ownerUser || DB.admins.some(a => a.username === username)) {
+      toast("❌ این نام کاربری قبلاً ثبت شده است");
+      return;
+    }
+    const now = new Date();
     DB.admins.push({
-      id: "adm_" + Math.random().toString(36).substring(2, 6),
-      name: document.getElementById("aName").value.trim(),
-      username: document.getElementById("aUser").value.trim(),
-      pass: document.getElementById("aPass").value
+      id: "adm_" + Date.now().toString(36),
+      name,
+      username,
+      pass,
+      active: true,
+      createdAt: now.toISOString(),
+      expiresAt: new Date(now.getTime() + days * 86400000).toISOString()
     });
     saveDB();
     document.getElementById("addAdminForm").reset();
     renderAdmins();
-    toast("✅ ادمین ثبت شد");
+    toast("✅ ادمین جدید ثبت شد");
   });
 
   function renderAdmins() {
     const tbody = document.getElementById("adminsTbody");
     if (!DB.admins.length) {
-      tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:12px">ادمینی وجود ندارد</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:14px">ادمینی ثبت نشده است</td></tr>`;
       return;
     }
-    tbody.innerHTML = DB.admins.map(a => `
-      <tr>
-        <td>${a.name}</td>
-        <td class="ltr">${a.username}</td>
-        <td>فعال</td>
-        <td><button type="button" class="btn btn-red btn-sm" onclick="delAdmin('${a.id}')">حذف</button></td>
-      </tr>
-    `).join("");
+    tbody.innerHTML = DB.admins.map(a => {
+      const rem = getRemDays(a.expiresAt);
+      const ok = a.active && rem > 0;
+      return `
+        <tr>
+          <td data-label="نام ادمین"><strong>${esc(a.name)}</strong></td>
+          <td data-label="نام کاربری" class="ltr">${esc(a.username)}</td>
+          <td data-label="تاریخ ایجاد">${new Date(a.createdAt).toLocaleDateString("fa-IR")}</td>
+          <td data-label="تاریخ انقضا">${new Date(a.expiresAt).toLocaleDateString("fa-IR")} (${rem} روز)</td>
+          <td data-label="وضعیت">${ok ? '<span class="badge b-green">فعال</span>' : '<span class="badge b-red">قطع</span>'}</td>
+          <td data-label="عملیات">
+            <div class="act-btns">
+              <button type="button" class="btn btn-green btn-sm" onclick="adminAct('extend','${a.id}')">⏳ تمدید</button>
+              <button type="button" class="btn btn-sky btn-sm" onclick="adminAct('edit','${a.id}')">✏️ ویرایش رمز</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="adminAct('toggle','${a.id}')">${a.active ? '⏸ قطع' : '▶️ وصل'}</button>
+              <button type="button" class="btn btn-red btn-sm" onclick="adminAct('del','${a.id}')">🗑️</button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join("");
   }
 
-  window.delAdmin = function(id) {
-    DB.admins = DB.admins.filter(x => x.id !== id);
-    saveDB(); renderAdmins(); toast("🗑️ حذف شد");
+  window.adminAct = function(type, id) {
+    const a = DB.admins.find(x => x.id === id);
+    if (!a) return;
+    if (type === "extend") {
+      const d = parseInt(prompt("تمدید اعتبار ادمین (روز):", "30"), 10);
+      if (d > 0) {
+        const base = Math.max(Date.now(), new Date(a.expiresAt).getTime());
+        a.expiresAt = new Date(base + d * 86400000).toISOString();
+        saveDB(); renderAdmins(); toast("✅ اعتبار ادمین تمدید شد");
+      }
+    } else if (type === "edit") {
+      const np = prompt("رمز عبور جدید برای ادمین:", a.pass);
+      if (np && np.trim()) { a.pass = np.trim(); saveDB(); toast("✅ رمز ادمین تغییر کرد"); }
+    } else if (type === "toggle") {
+      a.active = !a.active; saveDB(); renderAdmins(); toast("✅ وضعیت دسترسی تغییر کرد");
+    } else if (type === "del") {
+      if (confirm("حذف این ادمین؟")) {
+        DB.admins = DB.admins.filter(x => x.id !== id);
+        saveDB(); renderAdmins(); toast("🗑️ ادمین حذف شد");
+      }
+    }
   };
+
+  // تنظیمات و مدیریت سرورها
+  function renderServersSelectAndList() {
+    const sel = document.getElementById("cServer");
+    let opts = DB.servers.map(s => `<option value="${s.id}">${esc(s.country)} (${esc(s.endpoint)})</option>`).join("");
+    opts += UNCONFIGURED_COUNTRIES.map(c => `<option value="" disabled>${esc(c)} — نیازمند تنظیم سرور</option>`).join("");
+    sel.innerHTML = opts;
+
+    const listBox = document.getElementById("serversListBox");
+    if (listBox) {
+      listBox.innerHTML = DB.servers.map(s => `
+        <div class="pub-row">
+          <span><strong>${esc(s.country)}</strong> — <span class="ltr">${esc(s.endpoint)}</span></span>
+          <span><span class="badge b-green">پیکربندی‌شده</span></span>
+        </div>
+      `).join("");
+    }
+  }
+
+  document.getElementById("addServerForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    DB.servers.push({
+      id: "srv_" + Date.now().toString(36),
+      country: document.getElementById("sCountry").value.trim(),
+      endpoint: document.getElementById("sEndpoint").value.trim(),
+      publicKey: document.getElementById("sPubKey").value.trim(),
+      address: document.getElementById("sAddress").value.trim(),
+      configured: true
+    });
+    saveDB();
+    document.getElementById("addServerForm").reset();
+    renderServersSelectAndList();
+    toast("✅ سرور جدید ثبت شد");
+  });
+
+  function renderSettings() {
+    document.getElementById("setPanelName").value = DB.settings.panelName;
+    document.getElementById("setBaseUrl").value = DB.settings.baseUrl;
+    document.getElementById("setOwnerUser").value = DB.settings.ownerUser;
+    document.getElementById("setDns").value = DB.settings.dns;
+    document.getElementById("setMtu").value = DB.settings.mtu;
+  }
 
   document.getElementById("settingsForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    DB.settings.panelName = document.getElementById("setPanelName").value.trim();
     DB.settings.baseUrl = document.getElementById("setBaseUrl").value.trim();
+    DB.settings.ownerUser = document.getElementById("setOwnerUser").value.trim();
     const np = document.getElementById("setOwnerPass").value;
     if (np) DB.settings.ownerPass = np;
+    DB.settings.dns = document.getElementById("setDns").value.trim();
+    DB.settings.mtu = parseInt(document.getElementById("setMtu").value, 10) || 1300;
+    document.getElementById("setOwnerPass").value = "";
     saveDB();
+    enterPanel();
     toast("✅ تنظیمات ذخیره شد");
   });
 
-  document.getElementById("btnReset").addEventListener("click", () => {
-    if (confirm("آیا کل اطلاعات پنل پاک شود؟")) {
-      localStorage.removeItem(STORAGE_KEY);
-      location.reload();
+  document.getElementById("btnBackup").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify(DB, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `WireGuard_Panel_Backup_${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast("⬇️ فایل پشتیبان دانلود شد");
+  });
+
+  document.getElementById("inpRestore").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        if (parsed && parsed.settings && parsed.servers) {
+          DB = parsed;
+          saveDB();
+          renderAll();
+          toast("✅ اطلاعات بازیابی شد");
+        } else toast("❌ فایل پشتیبان نامعتبر است");
+      } catch (err) { toast("❌ خطا در خواندن فایل"); }
+    };
+    reader.readAsText(file);
+  });
+
+  document.getElementById("btnResetAll").addEventListener("click", () => {
+    if (confirm("مرحله ۱ از ۲: آیا از پاک کردن تمام داده‌ها مطمئن هستید؟")) {
+      const code = prompt("مرحله ۲ از ۲: برای تأیید نهایی عبارت RESET را وارد کنید:");
+      if (code === "RESET") {
+        localStorage.removeItem(STORAGE_KEY);
+        sessionStorage.removeItem(SESSION_KEY);
+        location.reload();
+      }
     }
   });
 
   function renderAll() {
-    renderConfigs();
+    renderDashboard();
+    renderServersSelectAndList();
+    renderProfilesSection();
+    renderConfigsTable();
     if (CURRENT_USER && CURRENT_USER.role === "owner") {
       renderAdmins();
-      document.getElementById("setBaseUrl").value = DB.settings.baseUrl;
+      renderSettings();
     }
   }
 
-  (function boot(){
+  (function boot() {
     initDB();
-    if (checkPublicSubRoute()) return;
-    const sess = sessionStorage.getItem(SESSION_KEY);
-    if (sess) {
+    if (checkPublicSubscriptionHash()) return;
+    const savedSess = sessionStorage.getItem(SESSION_KEY);
+    if (savedSess) {
       try {
-        CURRENT_USER = JSON.parse(sess);
-        enterApp();
-      } catch(e){}
+        CURRENT_USER = JSON.parse(savedSess);
+        enterPanel();
+      } catch (e) {}
     }
   })();
 })();
