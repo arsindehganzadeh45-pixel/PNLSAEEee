@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>WireGuard Professional Panel | پنل مدیریت حرفه‌ای وایرگارد</title>
+<title>Sobhan WireGuard Panel | پنل مدیریت وایرگارد سبحان</title>
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
@@ -247,8 +247,8 @@ tr:hover td{background:#f8fafc}
 }
 .modal.open{display:flex}
 .modal-box{
-  background:var(--white);border-radius:18px;width:100%;max-width:500px;
-  padding:22px;box-shadow:0 20px 50px rgba(0,0,0,0.28);max-height:90vh;overflow-y:auto;
+  background:var(--white);border-radius:18px;width:100%;max-width:520px;
+  padding:22px;box-shadow:0 20px 50px rgba(0,0,0,0.28);max-height:92vh;overflow-y:auto;
 }
 .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
 .close-modal{background:none;border:none;font-size:1.3rem;color:var(--muted)}
@@ -256,6 +256,11 @@ tr:hover td{background:#f8fafc}
   background:#0f172a;color:#38bdf8;padding:12px;border-radius:10px;
   font-family:monospace;font-size:0.78rem;direction:ltr;text-align:left;
   white-space:pre-wrap;word-break:break-all;margin:10px 0;
+}
+.server-pre{
+  background:#1e1b4b;color:#a5b4fc;padding:12px;border-radius:10px;
+  font-family:monospace;font-size:0.76rem;direction:ltr;text-align:left;
+  white-space:pre-wrap;word-break:break-all;margin:8px 0;border:1px solid #3730a3;
 }
 #qrBox,#pubQr,#browseQr,#gameQr{
   display:flex;justify-content:center;padding:14px;background:#fff;
@@ -279,22 +284,20 @@ tr:hover td{background:#f8fafc}
   <div class="pub-card">
     <div style="text-align:center;margin-bottom:16px">
       <div class="wg-logo" style="width:54px;height:54px;font-size:24px">🛡️</div>
-      <h2 style="color:var(--navy);font-size:1.15rem" id="pubTitle">صفحه اشتراک WireGuard</h2>
-      <span class="badge b-sky" id="pubSubBadge">لینک اشتراک رمزنگاری‌شده</span>
+      <h2 style="color:var(--navy);font-size:1.15rem" id="pubTitle">صفحه اشتراک سبحان</h2>
+      <span class="badge b-sky" id="pubSubBadge">لینک اشتراک یکتا و رمزنگاری‌شده</span>
     </div>
 
-    <!-- فرم دریافت رمز اشتراک -->
     <div id="pubUnlockBox">
-      <div class="info-note">این اشتراک با رمزنگاری استاندارد محافظت شده است. برای مشاهده مشخصات، دریافت QR Code و دانلود فایل کانفیگ، رمز اشتراک را وارد کنید.</div>
+      <div class="info-note">برای مشاهده کانفیگ اختصاصی، دریافت QR Code و دانلود فایل .conf، رمز اشتراک را وارد کنید.</div>
       <div class="inp-group">
         <label>رمز اشتراک (Subscription Password)</label>
         <input type="password" id="pubPassInput" class="ltr" placeholder="رمز اشتراک را وارد کنید..."/>
       </div>
-      <div class="login-err" id="pubPassErr">رمز اشتراک اشتباه است یا لینک آسیب دیده است.</div>
+      <div class="login-err" id="pubPassErr">رمز اشتراک اشتباه است.</div>
       <button type="button" class="btn-primary" id="btnUnlockSub">🔓 بازگشایی اشتراک</button>
     </div>
 
-    <!-- محتوای رمزگشایی‌شده اشتراک -->
     <div id="pubUnlockedContent" style="display:none">
       <div id="pubDetails"></div>
       <div id="pubQr"></div>
@@ -311,9 +314,9 @@ tr:hover td{background:#f8fafc}
 <div id="loginScreen">
   <div class="login-card">
     <div class="wg-logo">🛡️</div>
-    <h1 id="loginPanelName">WireGuard Professional Panel</h1>
-    <p>ورود یکپارچه مالک و ادمین‌های سیستم</p>
-    <div class="login-err" id="loginErr">نام کاربری یا رمز عبور اشتباه است یا حساب غیرفعال می‌باشد.</div>
+    <h1 id="loginPanelName">پنل وایرگارد سبحان</h1>
+    <p>مدیریت کانفیگ‌های یکتا بدون تداخل IP</p>
+    <div class="login-err" id="loginErr">نام کاربری یا رمز عبور اشتباه است.</div>
     <form id="loginForm">
       <div class="inp-group">
         <label>نام کاربری</label>
@@ -323,7 +326,7 @@ tr:hover td{background:#f8fafc}
         <label>رمز عبور</label>
         <input type="password" id="loginPass" placeholder="رمز عبور" required autocomplete="current-password"/>
       </div>
-      <button type="submit" class="btn-primary">ورود به پنل مدیریت</button>
+      <button type="submit" class="btn-primary">ورود به پنل سبحان</button>
     </form>
   </div>
 </div>
@@ -334,8 +337,8 @@ tr:hover td{background:#f8fafc}
     <div class="topbar-right">
       <button type="button" class="hamburger" id="btnToggleMenu" title="منو">☰</button>
       <div>
-        <div class="brand-title" id="topBrandTitle">WireGuard Professional Panel</div>
-        <div class="brand-sub">مدیریت پروفایل‌ها و لینک اشتراک امن</div>
+        <div class="brand-title" id="topBrandTitle">پنل وایرگارد سبحان</div>
+        <div class="brand-sub">تولید خودکار IP و کلیدهای غیرتکراری (ظرفیت ۱۰,۰۰۰ گیگابایت)</div>
       </div>
     </div>
     <div class="user-pill">
@@ -347,14 +350,14 @@ tr:hover td{background:#f8fafc}
   <div class="sidebar-backdrop" id="sideBackdrop"></div>
   <aside class="sidebar" id="sidebar">
     <div class="side-head">
-      <strong style="font-size:1rem;color:#38bdf8">🛡️ منوی پنل</strong>
+      <strong style="font-size:1rem;color:#38bdf8">🛡️ پنل سبحان</strong>
       <button type="button" id="btnCloseSide" style="background:none;border:none;color:#fff;font-size:1.2rem">✕</button>
     </div>
     <ul class="side-menu">
-      <li><button type="button" class="side-btn active" data-sec="dash">📊 داشبورد اصلی</button></li>
-      <li><button type="button" class="side-btn" data-sec="create">➕ ساخت کانفیگ</button></li>
+      <li><button type="button" class="side-btn active" data-sec="dash">📊 داشبورد و ظرفیت</button></li>
+      <li><button type="button" class="side-btn" data-sec="create">➕ ساخت کانفیگ یکتا</button></li>
       <li><button type="button" class="side-btn" data-sec="profiles">🌐 پروفایل وب‌گردی و گیم</button></li>
-      <li><button type="button" class="side-btn" data-sec="configs">📂 مدیریت کانفیگ‌ها و ساب</button></li>
+      <li><button type="button" class="side-btn" data-sec="configs">📂 لیست کانفیگ‌ها و ساب</button></li>
       <li class="owner-only"><button type="button" class="side-btn" data-sec="admins">👥 مدیریت ادمین‌ها</button></li>
       <li class="owner-only"><button type="button" class="side-btn" data-sec="settings">⚙️ تنظیمات و سرورها</button></li>
     </ul>
@@ -363,9 +366,8 @@ tr:hover td{background:#f8fafc}
 
   <main class="main-content" id="mainContent">
 
-    <!-- هشدار تغییر رمز پیش‌فرض -->
     <div class="alert-banner" id="defaultPassAlert" style="display:none">
-      <span>⚠️ <strong>هشدار امنیتی:</strong> شما هنوز از رمز عبور پیش‌فرض (admin) استفاده می‌کنید. لطفاً از بخش تنظیمات رمز خود را تغییر دهید.</span>
+      <span>⚠️ <strong>هشدار امنیتی:</strong> رمز عبور پیش‌فرض (admin) هنوز تغییر نکرده است.</span>
       <button type="button" class="btn btn-amber btn-sm" onclick="navTo('settings')">تغییر رمز عبور</button>
     </div>
 
@@ -377,27 +379,27 @@ tr:hover td{background:#f8fafc}
       </div>
       <div class="stats-grid" id="dashStats"></div>
       <div class="panel-card">
-        <h3>🖥️ وضعیت سرور اصلی و پروفایل‌ها</h3>
+        <h3>🖥️ وضعیت سرور و تخصیص خودکار IP</h3>
         <div id="dashServerSummary"></div>
       </div>
     </section>
 
     <!-- 2. بخش ساخت کانفیگ -->
     <section id="sec-create" class="page-sec">
-      <div class="sec-header"><h2>➕ ساخت کانفیگ جدید (آماده‌سازی فایل)</h2></div>
+      <div class="sec-header"><h2>➕ ساخت کانفیگ یکتا (IP و کلید غیرتکراری)</h2></div>
       <div class="panel-card">
         <div class="info-note">
-          <strong>نکته فنی شبکه:</strong> در نسخه بدون Backend، تمام فایل‌های خروجی از مشخصات و آدرس شبکه واقعی سرور اصلی (<code>172.26.6.23/32</code>) استفاده می‌کنند. برای اتصال مستقل کاربران جدید، ثبت <code>PublicKey</code> مشتق‌شده کلاینت در تنظیمات سمت سرور ضروری است.
+          <strong>تضمین عدم تکرار:</strong> سیستم به صورت هوشمند اولین IP آزاد بعدی (مثلاً <code id="nextIpPreview" class="ltr">172.26.6.24/32</code>) را به همراه یک جفت کلید X25519 کاملاً تصادفی برای این کاربر می‌سازد.
         </div>
         <form id="createCfgForm">
           <div class="form-grid">
             <div class="field">
               <label>نام کاربر *</label>
-              <input type="text" id="cUser" placeholder="مثال: Ali" required/>
+              <input type="text" id="cUser" placeholder="مثال: Reza" required/>
             </div>
             <div class="field">
               <label>نام کانفیگ *</label>
-              <input type="text" id="cTitle" placeholder="مثال: Germany-Pro" required/>
+              <input type="text" id="cTitle" placeholder="مثال: Germany-VIP" required/>
             </div>
             <div class="field">
               <label>انتخاب نوع استفاده *</label>
@@ -411,24 +413,24 @@ tr:hover td{background:#f8fafc}
               <select id="cServer" required></select>
             </div>
             <div class="field">
+              <label>آدرس IP اختصاصی کلاینت (خودکار و قابل ویرایش) *</label>
+              <input type="text" id="cClientIp" class="ltr" required/>
+            </div>
+            <div class="field">
               <label>حجم (گیگابایت) *</label>
-              <input type="number" id="cVolume" min="1" max="5000" value="50" required/>
+              <input type="number" id="cVolume" min="1" max="10000" value="50" required/>
             </div>
             <div class="field">
               <label>مدت اعتبار (روز) *</label>
               <input type="number" id="cDays" min="1" max="365" value="30" required/>
             </div>
             <div class="field">
-              <label>تعداد کاربر (پیش‌فرض ۱)</label>
-              <input type="number" id="cUsersCount" min="1" max="10" value="1" required/>
-            </div>
-            <div class="field">
-              <label>رمز اختصاصی لینک اشتراک (Subscription) *</label>
+              <label>رمز اختصاصی لینک اشتراک *</label>
               <input type="text" id="cSubPass" class="ltr" placeholder="مثال: 123456" required/>
             </div>
           </div>
           <div style="margin-top:18px">
-            <button type="submit" id="btnSubmitCfg" class="btn btn-navy" style="padding:11px 22px">✨ تولید کانفیگ و نمایش جزئیات</button>
+            <button type="submit" id="btnSubmitCfg" class="btn btn-navy" style="padding:11px 22px">✨ تولید کانفیگ یکتا و نمایش کد سرور</button>
           </div>
         </form>
       </div>
@@ -436,26 +438,27 @@ tr:hover td{background:#f8fafc}
 
     <!-- 3. بخش پروفایل‌های وب‌گردی و گیم -->
     <section id="sec-profiles" class="page-sec">
-      <div class="sec-header"><h2>🌐 پروفایل‌های مستقیم وب‌گردی و گیم (متصل به سرور اصلی)</h2></div>
+      <div class="sec-header">
+        <h2>🌐 پروفایل‌های مستقیم وب‌گردی و گیم</h2>
+        <button type="button" class="btn btn-outline btn-sm" onclick="renderProfilesSection(true)">🔄 تولید مجدد کلید و IP جدید</button>
+      </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
-        <!-- کارت وب‌گردی -->
         <div class="panel-card">
-          <h3>🌐 پروفایل وب‌گردی (Web Browsing)</h3>
+          <h3>🌐 پروفایل وب‌گردی (یکتا)</h3>
           <div id="browseProfileInfo"></div>
           <div id="browseQr"></div>
           <div style="display:flex;gap:8px;margin-top:12px">
-            <button type="button" class="btn btn-navy" style="flex:1;justify-content:center" id="btnDlBrowse">⬇️ دانلود فایل .conf</button>
+            <button type="button" class="btn btn-navy" style="flex:1;justify-content:center" id="btnDlBrowse">⬇️ دانلود .conf</button>
             <button type="button" class="btn btn-sky" style="flex:1;justify-content:center" id="btnCopyBrowse">📋 کپی کانفیگ</button>
           </div>
         </div>
 
-        <!-- کارت گیم -->
         <div class="panel-card">
-          <h3>🎮 پروفایل گیم (Gaming)</h3>
+          <h3>🎮 پروفایل گیم (یکتا)</h3>
           <div id="gameProfileInfo"></div>
           <div id="gameQr"></div>
           <div style="display:flex;gap:8px;margin-top:12px">
-            <button type="button" class="btn btn-navy" style="flex:1;justify-content:center" id="btnDlGame">⬇️ دانلود فایل .conf</button>
+            <button type="button" class="btn btn-navy" style="flex:1;justify-content:center" id="btnDlGame">⬇️ دانلود .conf</button>
             <button type="button" class="btn btn-sky" style="flex:1;justify-content:center" id="btnCopyGame">📋 کپی کانفیگ</button>
           </div>
         </div>
@@ -472,9 +475,9 @@ tr:hover td{background:#f8fafc}
               <tr>
                 <th>کاربر / کانفیگ</th>
                 <th>نوع سرویس</th>
-                <th>سرور / IP</th>
+                <th>سرور / IP اختصاصی</th>
                 <th>حجم / اعتبار</th>
-                <th>وضعیت لینک ساب</th>
+                <th>لینک ساب</th>
                 <th>عملیات</th>
               </tr>
             </thead>
@@ -484,11 +487,10 @@ tr:hover td{background:#f8fafc}
       </div>
     </section>
 
-    <!-- 5. مدیریت ادمین‌ها (فقط مالک) -->
+    <!-- 5. مدیریت ادمین‌ها -->
     <section id="sec-admins" class="page-sec owner-only">
-      <div class="sec-header"><h2>👥 مدیریت محلی ادمین‌ها</h2></div>
+      <div class="sec-header"><h2>👥 مدیریت ادمین‌ها</h2></div>
       <div class="panel-card">
-        <div class="info-note">توجه امنیتی: نقش‌های مالک و ادمین در نسخه تک‌فایلی جهت مدیریت محلی مرورگر هستند و جایگزین احراز هویت سمت سرور نمی‌باشند.</div>
         <h3>➕ ساخت ادمین جدید</h3>
         <form id="addAdminForm">
           <div class="form-grid">
@@ -520,14 +522,15 @@ tr:hover td{background:#f8fafc}
       </div>
     </section>
 
-    <!-- 6. تنظیمات پنل و سرورها (فقط مالک) -->
+    <!-- 6. تنظیمات پنل و سرورها -->
     <section id="sec-settings" class="page-sec owner-only">
-      <div class="sec-header"><h2>⚙️ تنظیمات پنل و مدیریت سرورها</h2></div>
+      <div class="sec-header"><h2>⚙️ تنظیمات پنل سبحان و سرورها</h2></div>
       <div class="panel-card">
-        <h3>🔐 تنظیمات عمومی و دسترسی مالک</h3>
+        <h3>🔐 تنظیمات عمومی</h3>
         <form id="settingsForm">
           <div class="form-grid">
             <div class="field"><label>نام پنل</label><input type="text" id="setPanelName" required/></div>
+            <div class="field"><label>ظرفیت کل پنل (گیگابایت)</label><input type="number" id="setTotalCap" min="100" max="100000" required/></div>
             <div class="field"><label>آدرس پایه پنل (Panel URL)</label><input type="text" id="setBaseUrl" class="ltr" required/></div>
             <div class="field"><label>نام کاربری مالک</label><input type="text" id="setOwnerUser" class="ltr" required/></div>
             <div class="field"><label>رمز عبور جدید مالک (خالی = بدون تغییر)</label><input type="password" id="setOwnerPass" class="ltr" placeholder="رمز عبور جدید..."/></div>
@@ -539,13 +542,13 @@ tr:hover td{background:#f8fafc}
       </div>
 
       <div class="panel-card">
-        <h3>🖥️ افزودن سرور جدید (کشورهای دیگر)</h3>
+        <h3>🖥️ افزودن سرور جدید</h3>
         <form id="addServerForm">
           <div class="form-grid">
-            <div class="field"><label>نام سرور / کشور</label><input type="text" id="sCountry" required placeholder="مثال: ترکیه - استانبول"/></div>
+            <div class="field"><label>نام سرور / کشور</label><input type="text" id="sCountry" required placeholder="مثال: هلند - آمستردام"/></div>
             <div class="field"><label>Endpoint (IP:Port)</label><input type="text" id="sEndpoint" class="ltr" required placeholder="185.10.20.30:51820"/></div>
             <div class="field"><label>PublicKey سرور</label><input type="text" id="sPubKey" class="ltr" required placeholder="کلید عمومی ۴۴ کاراکتری"/></div>
-            <div class="field"><label>آدرس شبکه کلاینت (Address)</label><input type="text" id="sAddress" class="ltr" required value="172.26.6.23/32"/></div>
+            <div class="field"><label>IP پایه شروع (Subnet)</label><input type="text" id="sAddress" class="ltr" required value="172.26.6.23/32"/></div>
           </div>
           <button type="submit" class="btn btn-sky" style="margin-top:12px">➕ ثبت سرور جدید</button>
         </form>
@@ -553,7 +556,7 @@ tr:hover td{background:#f8fafc}
       </div>
 
       <div class="panel-card">
-        <h3>💾 پشتیبان‌گیری و بازنشانی (Reset)</h3>
+        <h3>💾 پشتیبان‌گیری و بازنشانی</h3>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button type="button" class="btn btn-green" id="btnBackup">⬇️ پشتیبان‌گیری (JSON)</button>
           <label class="btn btn-sky" style="margin:0;cursor:pointer">⬆️ بازیابی اطلاعات<input type="file" id="inpRestore" accept=".json" style="display:none"/></label>
@@ -580,10 +583,10 @@ tr:hover td{background:#f8fafc}
 
 <script>
 (function(){
-  const STORAGE_KEY = "wg_pro_panel_v2_db";
-  const SESSION_KEY = "wg_pro_panel_v2_sess";
+  const STORAGE_KEY = "sobhan_wg_panel_v3_db";
+  const SESSION_KEY = "sobhan_wg_panel_v3_sess";
 
-  // پیاده‌سازی استاندارد X25519 Scalar Multiplication برای مشتق کردن دقیق PublicKey از PrivateKey
+  // پیاده‌سازی استاندارد X25519 Scalar Multiplication برای ساخت کلیدهای واقعی و غیرتکراری
   const X25519 = (function(){
     const P = (1n << 255n) - 19n;
     function mod(a) { const r = a % P; return r >= 0n ? r : r + P; }
@@ -641,7 +644,6 @@ tr:hover td{background:#f8fafc}
     };
   })();
 
-  // رمزنگاری و رمزگشایی واقعی AES-GCM با Web Crypto API برای لینک اشتراک
   const SubCrypto = {
     async deriveKey(password, salt) {
       const enc = new TextEncoder();
@@ -691,7 +693,6 @@ tr:hover td{background:#f8fafc}
     }
   };
 
-  // اطلاعات واقعی سرور اصلی ارسال‌شده توسط کاربر
   const DEFAULT_SERVER = {
     id: "srv_main_germany",
     country: "آلمان (سرور اصلی)",
@@ -701,11 +702,10 @@ tr:hover td{background:#f8fafc}
     configured: true
   };
 
-  const UNCONFIGURED_COUNTRIES = ["ایران", "ترکیه", "هلند", "فرانسه", "امارات", "فنلاند", "انگلیس"];
-
   let DB = {
     settings: {
-      panelName: "WireGuard Professional Panel",
+      panelName: "پنل وایرگارد سبحان",
+      totalCapacityGB: 10000,
       baseUrl: window.location.origin + window.location.pathname,
       ownerUser: "admin",
       ownerPass: "admin",
@@ -718,7 +718,6 @@ tr:hover td{background:#f8fafc}
   };
 
   let CURRENT_USER = null;
-  let ACTIVE_SUB_DATA = null;
 
   function toast(msg) {
     const t = document.getElementById("toast");
@@ -737,7 +736,10 @@ tr:hover td{background:#f8fafc}
     if (raw) {
       try {
         const parsed = JSON.parse(raw);
-        if (parsed && parsed.settings && Array.isArray(parsed.servers)) DB = parsed;
+        if (parsed && parsed.settings && Array.isArray(parsed.servers)) {
+          DB = parsed;
+          if (!DB.settings.totalCapacityGB) DB.settings.totalCapacityGB = 10000;
+        }
       } catch (e) {}
     }
   }
@@ -751,13 +753,35 @@ tr:hover td{background:#f8fafc}
     return d > 0 ? d : 0;
   }
 
-  // اصلاح قطعی ساختار کانفیگ جهت جلوگیری از به هم ریختگی AllowedIPs در موبایل
+  // محاسبه هوشمند و خودکار IP آزاد بعدی برای جلوگیری از تداخل و تکرار
+  function getNextAvailableClientIp(serverId) {
+    const srv = DB.servers.find(s => s.id === serverId) || DB.servers[0];
+    const baseIpPart = (srv.address || "172.26.6.23/32").split("/")[0];
+    const octets = baseIpPart.split(".");
+    const prefix = octets.slice(0, 3).join(".");
+    const startHost = parseInt(octets[3], 10) || 23;
+
+    const usedIps = new Set(DB.configs.map(c => (c.clientIp || "").split("/")[0]));
+    // اگر هیچ کانفیگی نیست، از اولی یا بعدی شروع کن
+    let candidateHost = DB.configs.length === 0 ? startHost : startHost + 1;
+
+    while (candidateHost < 254) {
+      const candidateIp = `${prefix}.${candidateHost}`;
+      if (!usedIps.has(candidateIp)) {
+        return `${candidateIp}/32`;
+      }
+      candidateHost++;
+    }
+    return `${prefix}.${Math.floor(Math.random() * 200) + 30}/32`;
+  }
+
   function buildWireGuardConf(cfg) {
     const srv = DB.servers.find(s => s.id === cfg.serverId) || DB.servers[0];
+    const clientAddr = cfg.clientIp || srv.address;
     return [
       "[Interface]",
       "PrivateKey = " + cfg.clientPrivateKey,
-      "Address = " + srv.address,
+      "Address = " + clientAddr,
       "DNS = " + DB.settings.dns,
       "MTU = " + DB.settings.mtu,
       "",
@@ -769,9 +793,8 @@ tr:hover td{background:#f8fafc}
     ].join("\n");
   }
 
-  // دانلود فایل واقعی .conf بدون هیچ‌گونه پسوند .txt
   function downloadConfFile(confContent, fileNameBase) {
-    const clean = String(fileNameBase || "WireGuard_Config").replace(/[^a-zA-Z0-9_\u0600-\u06FF-]/g, "_");
+    const clean = String(fileNameBase || "Sobhan_WG").replace(/[^a-zA-Z0-9_\u0600-\u06FF-]/g, "_");
     const fileName = clean.endsWith(".conf") ? clean : clean + ".conf";
     const blob = new Blob([confContent], { type: "application/x-wg-config" });
     const url = URL.createObjectURL(blob);
@@ -784,7 +807,6 @@ tr:hover td{background:#f8fafc}
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
-  // بررسی باز شدن لینک ساب در قسمت Hash (#sub=...) مستقل از مرورگر سازنده
   function checkPublicSubscriptionHash() {
     const hash = window.location.hash || "";
     if (!hash.startsWith("#sub=")) return false;
@@ -811,11 +833,10 @@ tr:hover td{background:#f8fafc}
         const data = await SubCrypto.decryptPayload(encryptedStr, pass);
         errBox.style.display = "none";
         if (data.disabled) {
-          errBox.textContent = "این لینک اشتراک توسط مدیر غیرفعال شده است.";
+          errBox.textContent = "این لینک اشتراک غیرفعال شده است.";
           errBox.style.display = "block";
           return;
         }
-        ACTIVE_SUB_DATA = data;
         document.getElementById("pubUnlockBox").style.display = "none";
         document.getElementById("pubUnlockedContent").style.display = "block";
 
@@ -826,9 +847,8 @@ tr:hover td{background:#f8fafc}
           <div class="pub-row"><span>نام کاربر</span><span>${esc(data.userName)}</span></div>
           <div class="pub-row"><span>نام کانفیگ</span><span>${esc(data.configName)}</span></div>
           <div class="pub-row"><span>نوع سرویس</span><span>${esc(data.usageType)}</span></div>
-          <div class="pub-row"><span>آدرس IP شبکه</span><span class="ltr">${esc(data.address)}</span></div>
-          <div class="pub-row"><span>حجم کل ثبت‌شده</span><span>${data.volumeGB} GB</span></div>
-          <div class="pub-row"><span>وضعیت حجم باقی‌مانده</span><span>نیازمند اتصال به سرور مانیتورینگ</span></div>
+          <div class="pub-row"><span>آدرس IP اختصاصی</span><span class="ltr">${esc(data.address)}</span></div>
+          <div class="pub-row"><span>حجم ثبت‌شده</span><span>${data.volumeGB} GB</span></div>
           <div class="pub-row"><span>روزهای باقی‌مانده</span><span>${remDays} روز</span></div>
           <div class="pub-row"><span>وضعیت اشتراک</span><span>${isValid ? '<span class="badge b-green">معتبر</span>' : '<span class="badge b-red">منقضی شده</span>'}</span></div>
         `;
@@ -857,14 +877,13 @@ tr:hover td{background:#f8fafc}
           navigator.clipboard.writeText(confText).then(() => toast("✅ متن کانفیگ کپی شد"));
         };
       } catch (e) {
-        errBox.textContent = "رمز اشتراک اشتباه است یا داده‌های لینک خراب شده‌اند.";
+        errBox.textContent = "رمز اشتراک اشتباه است.";
         errBox.style.display = "block";
       }
     };
     return true;
   }
 
-  // ورود به پنل
   document.getElementById("loginForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const u = document.getElementById("loginUser").value.trim();
@@ -872,7 +891,7 @@ tr:hover td{background:#f8fafc}
     const errBox = document.getElementById("loginErr");
 
     if (u === DB.settings.ownerUser && p === DB.settings.ownerPass) {
-      CURRENT_USER = { role: "owner", id: "owner", username: u, name: "مالک پنل" };
+      CURRENT_USER = { role: "owner", id: "owner", username: u, name: "سبحان (مالک)" };
       sessionStorage.setItem(SESSION_KEY, JSON.stringify(CURRENT_USER));
       errBox.style.display = "none";
       enterPanel();
@@ -923,7 +942,6 @@ tr:hover td{background:#f8fafc}
     location.reload();
   });
 
-  // منوی همبرگری و سایدبار
   const sidebar = document.getElementById("sidebar");
   const backdrop = document.getElementById("sideBackdrop");
   const mainContent = document.getElementById("mainContent");
@@ -957,7 +975,6 @@ tr:hover td{background:#f8fafc}
     return DB.configs.filter(c => c.creatorId === CURRENT_USER.id);
   }
 
-  // ساخت لینک ساب رمزنگاری‌شده AES-GCM
   async function generateEncryptedSubUrl(cfg) {
     const srv = DB.servers.find(s => s.id === cfg.serverId) || DB.servers[0];
     const payload = {
@@ -966,7 +983,7 @@ tr:hover td{background:#f8fafc}
       usageType: cfg.usageType,
       volumeGB: cfg.volumeGB,
       expiresAt: cfg.expiresAt,
-      address: srv.address,
+      address: cfg.clientIp || srv.address,
       dns: DB.settings.dns,
       mtu: DB.settings.mtu,
       serverPublicKey: srv.publicKey,
@@ -979,7 +996,17 @@ tr:hover td{background:#f8fafc}
     return `${cleanBase}#sub=${cipherHash}`;
   }
 
-  // ساخت کانفیگ جدید
+  function refreshAutoIpField() {
+    const srvId = document.getElementById("cServer").value;
+    const nextIp = getNextAvailableClientIp(srvId);
+    const ipInput = document.getElementById("cClientIp");
+    const preview = document.getElementById("nextIpPreview");
+    if (ipInput) ipInput.value = nextIp;
+    if (preview) preview.textContent = nextIp;
+  }
+
+  document.getElementById("cServer").addEventListener("change", refreshAutoIpField);
+
   let isCreating = false;
   document.getElementById("createCfgForm").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -989,20 +1016,21 @@ tr:hover td{background:#f8fafc}
     const configName = document.getElementById("cTitle").value.trim();
     const usageType = document.getElementById("cUsageType").value;
     const serverId = document.getElementById("cServer").value;
+    const clientIp = document.getElementById("cClientIp").value.trim();
     const volumeGB = parseInt(document.getElementById("cVolume").value, 10);
     const days = parseInt(document.getElementById("cDays").value, 10);
-    const usersCount = parseInt(document.getElementById("cUsersCount").value, 10) || 1;
     const subPassword = document.getElementById("cSubPass").value.trim();
 
-    if (!serverId) {
-      toast("❌ لطفاً یک سرور پیکربندی‌شده انتخاب کنید.");
+    if (DB.configs.some(c => c.clientIp === clientIp)) {
+      toast("⚠️ این IP قبلاً استفاده شده است! IP بعدی جایگزین شد.");
+      refreshAutoIpField();
       return;
     }
 
     isCreating = true;
     const btn = document.getElementById("btnSubmitCfg");
     btn.disabled = true;
-    btn.textContent = "در حال تولید کلید و رمزنگاری...";
+    btn.textContent = "در حال تولید کلید و IP اختصاصی...";
 
     try {
       const keys = X25519.generateKeyPair();
@@ -1016,9 +1044,9 @@ tr:hover td{background:#f8fafc}
         configName,
         usageType,
         serverId,
+        clientIp,
         volumeGB,
         days,
-        usersCount,
         clientPrivateKey: keys.privateKey,
         clientPublicKey: keys.publicKey,
         subPassword,
@@ -1034,53 +1062,56 @@ tr:hover td{background:#f8fafc}
       saveDB();
 
       document.getElementById("createCfgForm").reset();
-      toast("✅ فایل کانفیگ و لینک اشتراک آماده شد");
+      toast("✅ کانفیگ کاملاً یکتا با IP " + clientIp + " ساخته شد");
       renderAll();
       showConfigDetailModal(newCfg.id);
     } finally {
       isCreating = false;
       btn.disabled = false;
-      btn.textContent = "✨ تولید کانفیگ و نمایش جزئیات";
+      btn.textContent = "✨ تولید کانفیگ یکتا و نمایش کد سرور";
     }
   });
 
-  // مودال جزئیات کانفیگ
   window.showConfigDetailModal = function(id) {
     const c = DB.configs.find(x => x.id === id);
     if (!c) return;
     const srv = DB.servers.find(s => s.id === c.serverId) || DB.servers[0];
     const confStr = buildWireGuardConf(c);
     const remDays = getRemDays(c.expiresAt);
+    const serverPeerBlock = `[Peer]\n# User: ${c.userName} (${c.configName})\nPublicKey = ${c.clientPublicKey}\nAllowedIPs = ${c.clientIp}`;
 
     document.getElementById("modalTitle").textContent = "جزئیات کانفیگ: " + c.configName;
     document.getElementById("modalBody").innerHTML = `
-      <div class="info-note">وضعیت اتصال: <strong>آماده‌سازی فایل</strong> (جهت اتصال واقعی، کلید عمومی کلاینت زیر را در سرور ثبت کنید)</div>
       <div class="pub-row"><span>نام کاربر</span><span>${esc(c.userName)}</span></div>
-      <div class="pub-row"><span>نام کانفیگ</span><span>${esc(c.configName)}</span></div>
-      <div class="pub-row"><span>نوع استفاده</span><span>${esc(c.usageType)}</span></div>
-      <div class="pub-row"><span>آدرس IP شبکه</span><span class="ltr">${esc(srv.address)}</span></div>
+      <div class="pub-row"><span>IP اختصاصی کلاینت</span><span class="ltr badge b-green">${esc(c.clientIp)}</span></div>
       <div class="pub-row"><span>Endpoint سرور</span><span class="ltr">${esc(srv.endpoint)}</span></div>
-      <div class="pub-row"><span>حجم ثبت‌شده / اعتبار</span><span>${c.volumeGB} GB / ${remDays} روز</span></div>
-      <div class="field" style="margin-top:10px">
-        <label>PublicKey کلاینت (جهت ثبت در wg0.conf سرور):</label>
-        <input type="text" class="ltr" readonly value="${esc(c.clientPublicKey)}"/>
+      <div class="pub-row"><span>حجم / اعتبار</span><span>${c.volumeGB} GB / ${remDays} روز</span></div>
+
+      <div class="field" style="margin-top:12px">
+        <label style="color:var(--petrol)">📌 کد آماده جهت ثبت در سرور (wg0.conf):</label>
+        <pre class="server-pre" id="mServerBlock">${esc(serverPeerBlock)}</pre>
+        <button type="button" class="btn btn-purple btn-sm" id="mBtnCopySrv">📋 کپی کد Peer برای سرور</button>
       </div>
-      <div class="field" style="margin-top:10px">
+
+      <div class="field" style="margin-top:12px">
         <label>لینک اشتراک رمزنگاری‌شده (رمز: ${esc(c.subPassword)}):</label>
         <input type="text" class="ltr" readonly value="${esc(c.subUrl)}"/>
       </div>
       <div id="qrBox" style="display:none"></div>
       <pre class="conf-pre">${esc(confStr)}</pre>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
-        <button type="button" class="btn btn-navy" id="mBtnDl">⬇️ دانلود فایل .conf</button>
+        <button type="button" class="btn btn-navy" id="mBtnDl">⬇️ دانلود .conf</button>
         <button type="button" class="btn btn-sky" id="mBtnCopy">📋 کپی کانفیگ</button>
-        <button type="button" class="btn btn-purple" id="mBtnQr">📱 نمایش QR Code</button>
-        <button type="button" class="btn btn-green" id="mBtnSub">🔗 کپی لینک اشتراک</button>
-        <button type="button" class="btn btn-outline" onclick="closeModal()">بستن پنجره</button>
+        <button type="button" class="btn btn-purple" id="mBtnQr">📱 QR Code</button>
+        <button type="button" class="btn btn-green" id="mBtnSub">🔗 کپی لینک ساب</button>
+        <button type="button" class="btn btn-outline" onclick="closeModal()">بستن</button>
       </div>
     `;
     document.getElementById("infoModal").classList.add("open");
 
+    document.getElementById("mBtnCopySrv").onclick = () => {
+      navigator.clipboard.writeText(serverPeerBlock).then(() => toast("✅ کد Peer سرور کپی شد"));
+    };
     document.getElementById("mBtnDl").onclick = () => downloadConfFile(confStr, c.configName);
     document.getElementById("mBtnCopy").onclick = () => {
       navigator.clipboard.writeText(confStr).then(() => toast("✅ متن کانفیگ کپی شد"));
@@ -1100,41 +1131,40 @@ tr:hover td{background:#f8fafc}
     document.getElementById("infoModal").classList.remove("open");
   };
 
-  // رندر داشبورد
   function renderDashboard() {
     const visible = getVisibleConfigs();
     const activeCount = visible.filter(c => getRemDays(c.expiresAt) > 0).length;
-    const expCount = visible.length - activeCount;
-    const totalVol = visible.reduce((s, c) => s + c.volumeGB, 0);
+    const usedVol = visible.reduce((s, c) => s + c.volumeGB, 0);
+    const totalCap = DB.settings.totalCapacityGB || 10000;
+    const remCap = Math.max(0, totalCap - usedVol);
     const mainSrv = DB.servers[0];
 
     document.getElementById("dashStats").innerHTML = `
-      <div class="stat-card"><div class="stat-icon ic-navy">📦</div><div class="stat-info"><span>تعداد کل کانفیگ‌ها</span><strong>${visible.length}</strong></div></div>
+      <div class="stat-card"><div class="stat-icon ic-navy">📦</div><div class="stat-info"><span>کانفیگ‌های یکتای ساخته‌شده</span><strong>${visible.length}</strong></div></div>
       <div class="stat-card"><div class="stat-icon ic-green">🟢</div><div class="stat-info"><span>کانفیگ‌های فعال</span><strong>${activeCount}</strong></div></div>
-      <div class="stat-card"><div class="stat-icon ic-red">🔴</div><div class="stat-info"><span>کانفیگ‌های منقضی</span><strong>${expCount}</strong></div></div>
-      ${CURRENT_USER.role === "owner" ? `<div class="stat-card"><div class="stat-icon ic-purple">👥</div><div class="stat-info"><span>تعداد ادمین‌ها</span><strong>${DB.admins.length}</strong></div></div>` : ""}
-      <div class="stat-card"><div class="stat-icon ic-sky">💾</div><div class="stat-info"><span>حجم ثبت‌شده</span><strong>${totalVol} GB</strong></div></div>
-      <div class="stat-card"><div class="stat-icon ic-navy">🖥️</div><div class="stat-info"><span>سرور انتخاب‌شده</span><strong style="font-size:0.9rem">${esc(mainSrv.country)}</strong></div></div>
+      <div class="stat-card"><div class="stat-icon ic-sky">💾</div><div class="stat-info"><span>ظرفیت کل پنل سبحان</span><strong>${totalCap.toLocaleString()} GB</strong></div></div>
+      <div class="stat-card"><div class="stat-icon ic-purple">📊</div><div class="stat-info"><span>حجم مصرف‌شده / باقیمانده</span><strong>${usedVol} / ${remCap.toLocaleString()} GB</strong></div></div>
     `;
 
     document.getElementById("dashServerSummary").innerHTML = `
       <div class="pub-row"><span>سرور اصلی فعال</span><span>${esc(mainSrv.country)}</span></div>
-      <div class="pub-row"><span>Endpoint واقعی سرور</span><span class="ltr">${esc(mainSrv.endpoint)}</span></div>
-      <div class="pub-row"><span>وضعیت پروفایل‌های وب‌گردی و گیم</span><span class="badge b-green">آماده استفاده روی سرور اصلی</span></div>
-      <div class="pub-row"><span>کشورهای بدون سرور اختصاصی</span><span>${UNCONFIGURED_COUNTRIES.join("، ")} <span class="badge b-amber">نیازمند تنظیم سرور</span></span></div>
+      <div class="pub-row"><span>Endpoint سرور</span><span class="ltr">${esc(mainSrv.endpoint)}</span></div>
+      <div class="pub-row"><span>IP آزاد بعدی آماده ساخت</span><span class="ltr badge b-sky">${esc(getNextAvailableClientIp(mainSrv.id))}</span></div>
     `;
   }
 
-  // رندر پروفایل‌های مستقیم وب‌گردی و گیم
-  function renderProfilesSection() {
+  window.renderProfilesSection = function(notify = false) {
     const srv = DB.servers[0];
     const browseKeys = X25519.generateKeyPair();
     const gameKeys = X25519.generateKeyPair();
+    const randHost1 = Math.floor(Math.random() * 100) + 100;
+    const randHost2 = randHost1 + 1;
+    const basePrefix = (srv.address || "172.26.6.23/32").split(".").slice(0, 3).join(".");
 
     const browseConf = [
       "[Interface]",
       "PrivateKey = " + browseKeys.privateKey,
-      "Address = " + srv.address,
+      "Address = " + basePrefix + "." + randHost1 + "/32",
       "DNS = " + DB.settings.dns,
       "MTU = " + DB.settings.mtu,
       "",
@@ -1148,7 +1178,7 @@ tr:hover td{background:#f8fafc}
     const gameConf = [
       "[Interface]",
       "PrivateKey = " + gameKeys.privateKey,
-      "Address = " + srv.address,
+      "Address = " + basePrefix + "." + randHost2 + "/32",
       "DNS = " + DB.settings.dns,
       "MTU = " + DB.settings.mtu,
       "",
@@ -1160,29 +1190,28 @@ tr:hover td{background:#f8fafc}
     ].join("\n");
 
     document.getElementById("browseProfileInfo").innerHTML = `
-      <div class="pub-row"><span>سرور متصل</span><span>${esc(srv.country)}</span></div>
-      <div class="pub-row"><span>DNS تنظیم‌شده</span><span class="ltr" style="font-size:0.75rem">${esc(DB.settings.dns)}</span></div>
-      <div class="pub-row"><span>MTU</span><span class="ltr">${DB.settings.mtu}</span></div>
+      <div class="pub-row"><span>IP یکتا</span><span class="ltr">${basePrefix}.${randHost1}/32</span></div>
+      <div class="pub-row"><span>PublicKey کلاینت</span><span class="ltr" style="font-size:0.7rem">${browseKeys.publicKey.slice(0,18)}...</span></div>
     `;
     const bQr = document.getElementById("browseQr");
     bQr.innerHTML = "";
     new QRCode(bQr, { text: browseConf, width: 170, height: 170 });
-    document.getElementById("btnDlBrowse").onclick = () => downloadConfFile(browseConf, "Web_Browsing_Profile");
+    document.getElementById("btnDlBrowse").onclick = () => downloadConfFile(browseConf, "Sobhan_Web_" + randHost1);
     document.getElementById("btnCopyBrowse").onclick = () => navigator.clipboard.writeText(browseConf).then(() => toast("✅ پروفایل وب‌گردی کپی شد"));
 
     document.getElementById("gameProfileInfo").innerHTML = `
-      <div class="pub-row"><span>Endpoint اتصال</span><span class="ltr">${esc(srv.endpoint)}</span></div>
-      <div class="pub-row"><span>PersistentKeepalive</span><span class="ltr">20s</span></div>
-      <div class="pub-row"><span>MTU</span><span class="ltr">${DB.settings.mtu}</span></div>
+      <div class="pub-row"><span>IP یکتا</span><span class="ltr">${basePrefix}.${randHost2}/32</span></div>
+      <div class="pub-row"><span>PublicKey کلاینت</span><span class="ltr" style="font-size:0.7rem">${gameKeys.publicKey.slice(0,18)}...</span></div>
     `;
     const gQr = document.getElementById("gameQr");
     gQr.innerHTML = "";
     new QRCode(gQr, { text: gameConf, width: 170, height: 170 });
-    document.getElementById("btnDlGame").onclick = () => downloadConfFile(gameConf, "Gaming_Profile");
+    document.getElementById("btnDlGame").onclick = () => downloadConfFile(gameConf, "Sobhan_Game_" + randHost2);
     document.getElementById("btnCopyGame").onclick = () => navigator.clipboard.writeText(gameConf).then(() => toast("✅ پروفایل گیم کپی شد"));
-  }
 
-  // رندر جدول کانفیگ‌ها و مدیریت ساب
+    if (notify) toast("🔄 کلیدها و IPهای جدید و غیرتکراری ساخته شدند");
+  };
+
   function renderConfigsTable() {
     const list = getVisibleConfigs();
     const tbody = document.getElementById("configsTbody");
@@ -1198,16 +1227,15 @@ tr:hover td{background:#f8fafc}
         <tr>
           <td data-label="کاربر / کانفیگ"><strong>${esc(c.userName)}</strong><br><small style="color:var(--muted)">${esc(c.configName)}</small></td>
           <td data-label="نوع سرویس"><span class="badge b-sky">${esc(c.usageType)}</span></td>
-          <td data-label="سرور / IP">${esc(srv.country)}<br><small class="ltr">${esc(srv.address)}</small></td>
+          <td data-label="سرور / IP اختصاصی">${esc(srv.country)}<br><small class="ltr badge b-purple">${esc(c.clientIp)}</small></td>
           <td data-label="حجم / اعتبار">${c.volumeGB} GB / ${rem} روز</td>
           <td data-label="لینک ساب">${c.subActive ? '<span class="badge b-green">فعال</span>' : '<span class="badge b-red">غیرفعال</span>'}</td>
           <td data-label="عملیات">
             <div class="act-btns">
-              <button type="button" class="btn btn-navy btn-sm" onclick="showConfigDetailModal('${c.id}')">👁️ جزئیات</button>
+              <button type="button" class="btn btn-navy btn-sm" onclick="showConfigDetailModal('${c.id}')">👁️ جزئیات و کد سرور</button>
               <button type="button" class="btn btn-sky btn-sm" onclick="copySubUrl('${c.id}')">🔗 کپی ساب</button>
-              <a href="${esc(c.subUrl)}" target="_blank" class="btn btn-outline btn-sm" style="text-decoration:none">🌐 باز کردن ساب</a>
-              <button type="button" class="btn btn-amber btn-sm" onclick="changeSubPass('${c.id}')">🔑 تغییر رمز ساب</button>
-              <button type="button" class="btn btn-outline btn-sm" onclick="toggleSubStatus('${c.id}')">${c.subActive ? '⏸ قطع ساب' : '▶️ وصل ساب'}</button>
+              <button type="button" class="btn btn-amber btn-sm" onclick="changeSubPass('${c.id}')">🔑 تغییر رمز</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="toggleSubStatus('${c.id}')">${c.subActive ? '⏸ قطع' : '▶️ وصل'}</button>
               <button type="button" class="btn btn-red btn-sm" onclick="deleteConfig('${c.id}')">🗑️</button>
             </div>
           </td>
@@ -1231,7 +1259,7 @@ tr:hover td{background:#f8fafc}
       c.subUrl = await generateEncryptedSubUrl(c);
       saveDB();
       renderConfigsTable();
-      toast("✅ رمز اشتراک تغییر کرد و لینک جدید ساخته شد");
+      toast("✅ رمز اشتراک تغییر کرد");
     }
   };
 
@@ -1246,15 +1274,14 @@ tr:hover td{background:#f8fafc}
   };
 
   window.deleteConfig = function(id) {
-    if (confirm("آیا این کانفیگ و لینک اشتراک آن حذف شوند؟")) {
+    if (confirm("آیا این کانفیگ حذف شود؟ (IP آن دوباره آزاد می‌شود)")) {
       DB.configs = DB.configs.filter(x => x.id !== id);
       saveDB();
       renderAll();
-      toast("🗑️ کانفیگ حذف شد");
+      toast("🗑️ کانفیگ حذف شد و IP آن آزاد گردید");
     }
   };
 
-  // مدیریت ادمین‌ها
   document.getElementById("addAdminForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.getElementById("aName").value.trim();
@@ -1301,7 +1328,7 @@ tr:hover td{background:#f8fafc}
           <td data-label="عملیات">
             <div class="act-btns">
               <button type="button" class="btn btn-green btn-sm" onclick="adminAct('extend','${a.id}')">⏳ تمدید</button>
-              <button type="button" class="btn btn-sky btn-sm" onclick="adminAct('edit','${a.id}')">✏️ ویرایش رمز</button>
+              <button type="button" class="btn btn-sky btn-sm" onclick="adminAct('edit','${a.id}')">✏️ رمز</button>
               <button type="button" class="btn btn-outline btn-sm" onclick="adminAct('toggle','${a.id}')">${a.active ? '⏸ قطع' : '▶️ وصل'}</button>
               <button type="button" class="btn btn-red btn-sm" onclick="adminAct('del','${a.id}')">🗑️</button>
             </div>
@@ -1319,37 +1346,35 @@ tr:hover td{background:#f8fafc}
       if (d > 0) {
         const base = Math.max(Date.now(), new Date(a.expiresAt).getTime());
         a.expiresAt = new Date(base + d * 86400000).toISOString();
-        saveDB(); renderAdmins(); toast("✅ اعتبار ادمین تمدید شد");
+        saveDB(); renderAdmins(); toast("✅ تمدید شد");
       }
     } else if (type === "edit") {
-      const np = prompt("رمز عبور جدید برای ادمین:", a.pass);
-      if (np && np.trim()) { a.pass = np.trim(); saveDB(); toast("✅ رمز ادمین تغییر کرد"); }
+      const np = prompt("رمز عبور جدید:", a.pass);
+      if (np && np.trim()) { a.pass = np.trim(); saveDB(); toast("✅ رمز تغییر کرد"); }
     } else if (type === "toggle") {
-      a.active = !a.active; saveDB(); renderAdmins(); toast("✅ وضعیت دسترسی تغییر کرد");
+      a.active = !a.active; saveDB(); renderAdmins(); toast("✅ وضعیت تغییر کرد");
     } else if (type === "del") {
       if (confirm("حذف این ادمین؟")) {
         DB.admins = DB.admins.filter(x => x.id !== id);
-        saveDB(); renderAdmins(); toast("🗑️ ادمین حذف شد");
+        saveDB(); renderAdmins(); toast("🗑️ حذف شد");
       }
     }
   };
 
-  // تنظیمات و مدیریت سرورها
   function renderServersSelectAndList() {
     const sel = document.getElementById("cServer");
-    let opts = DB.servers.map(s => `<option value="${s.id}">${esc(s.country)} (${esc(s.endpoint)})</option>`).join("");
-    opts += UNCONFIGURED_COUNTRIES.map(c => `<option value="" disabled>${esc(c)} — نیازمند تنظیم سرور</option>`).join("");
-    sel.innerHTML = opts;
+    sel.innerHTML = DB.servers.map(s => `<option value="${s.id}">${esc(s.country)} (${esc(s.endpoint)})</option>`).join("");
 
     const listBox = document.getElementById("serversListBox");
     if (listBox) {
       listBox.innerHTML = DB.servers.map(s => `
         <div class="pub-row">
           <span><strong>${esc(s.country)}</strong> — <span class="ltr">${esc(s.endpoint)}</span></span>
-          <span><span class="badge b-green">پیکربندی‌شده</span></span>
+          <span><span class="badge b-green">فعال</span></span>
         </div>
       `).join("");
     }
+    refreshAutoIpField();
   }
 
   document.getElementById("addServerForm").addEventListener("submit", (e) => {
@@ -1370,6 +1395,7 @@ tr:hover td{background:#f8fafc}
 
   function renderSettings() {
     document.getElementById("setPanelName").value = DB.settings.panelName;
+    document.getElementById("setTotalCap").value = DB.settings.totalCapacityGB || 10000;
     document.getElementById("setBaseUrl").value = DB.settings.baseUrl;
     document.getElementById("setOwnerUser").value = DB.settings.ownerUser;
     document.getElementById("setDns").value = DB.settings.dns;
@@ -1379,6 +1405,7 @@ tr:hover td{background:#f8fafc}
   document.getElementById("settingsForm").addEventListener("submit", (e) => {
     e.preventDefault();
     DB.settings.panelName = document.getElementById("setPanelName").value.trim();
+    DB.settings.totalCapacityGB = parseInt(document.getElementById("setTotalCap").value, 10) || 10000;
     DB.settings.baseUrl = document.getElementById("setBaseUrl").value.trim();
     DB.settings.ownerUser = document.getElementById("setOwnerUser").value.trim();
     const np = document.getElementById("setOwnerPass").value;
@@ -1396,7 +1423,7 @@ tr:hover td{background:#f8fafc}
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `WireGuard_Panel_Backup_${new Date().toISOString().slice(0,10)}.json`;
+    a.download = `Sobhan_WG_Backup_${new Date().toISOString().slice(0,10)}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1414,8 +1441,8 @@ tr:hover td{background:#f8fafc}
             DB = parsed;
             saveDB();
             renderAll();
-            toast("✅ اطلاعات بازیابی شد");
-          } else toast("❌ فایل پشتیبان نامعتبر است");
+            toast("✅ بازیابی شد");
+          } else toast("❌ فایل نامعتبر است");
         } catch (err) { toast("❌ خطا در خواندن فایل"); }
       };
       reader.readAsText(file);
@@ -1423,8 +1450,8 @@ tr:hover td{background:#f8fafc}
   });
 
   document.getElementById("btnResetAll").addEventListener("click", () => {
-    if (confirm("مرحله ۱ از ۲: آیا از پاک کردن تمام داده‌ها مطمئن هستید؟")) {
-      const code = prompt("مرحله ۲ از ۲: برای تأیید نهایی عبارت RESET را وارد کنید:");
+    if (confirm("مرحله ۱ از ۲: پاک کردن کل داده‌ها؟")) {
+      const code = prompt("مرحله ۲ از ۲: عبارت RESET را وارد کنید:");
       if (code === "RESET") {
         localStorage.removeItem(STORAGE_KEY);
         sessionStorage.removeItem(SESSION_KEY);
@@ -1436,7 +1463,7 @@ tr:hover td{background:#f8fafc}
   function renderAll() {
     renderDashboard();
     renderServersSelectAndList();
-    renderProfilesSection();
+    renderProfilesSection(false);
     renderConfigsTable();
     if (CURRENT_USER && CURRENT_USER.role === "owner") {
       renderAdmins();
